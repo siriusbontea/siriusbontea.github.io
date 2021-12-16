@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>North American Snowy Owls</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <link rel="stylesheet" href="https://use.typekit.net/uli8ywv.css">
+
+    <style>
+        /* UK Colors: 
+            #c7c9c8 light gray 
+            #63666a dark gray
+            #15397f dark blue
+            #009bda light blue
+            #0033a0 official blue
+        */
+        body {
+            font-family: monarcha,serif;
+            font-weight: 300;
+            font-style: normal;
+            margin: 0;
+            padding: 0;
+            background: #dfdfdf;
+            color: #63666a;
+            text-shadow: 1px 1px 1px #ababab;
+            font-size: .9em;
+        }
+
+        section {
+            width: 80%;
+            margin: 10px auto;
+        }
+
+        h1 {
+            font-family: merengue-script,sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 3.2em;
+            text-shadow: 3px 3px 3px #ababab;
+            margin: .5em 0 0 0;
+        }
+
+        h2 {
+            font-family: monarcha,serif;
+            font-weight: 500;
+            color: #63666a;
+            text-shadow: 2px 2px 2px #ababab;
+            font-size: 1.3em;
+            letter-spacing: .03em;
+            margin: .5em .5em .5em .5em;
+        }
+
+        p {
+            font-family: monarcha,serif;
+            font-weight: 300;
+            color: #63666a;
+            font-size: 1.15em;
+            line-height: 1.8em;
+            margin: .5em .5em .8em .5em;
+        }
+
+        a {
+            color: #334a79;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            padding: 0px 25px 9px 30px;
+            /* font-size: 0.96em; */
+            line-height: 1.6em;
+            color: #46494d;
+        }
+
+        li {
+            margin: 6px 0
+        }
+
+        #map {
+            width: 100%;
+            margin: 0px auto;
+
+        }
+
+        .max-image-width {
+            width: 100%;
+        }
+
+        /* add custom style class here */
+
+        .linkbox {
+            margin: 3px 0 20px 0;
+            display: block;
+            font-weight: 200;
+        }
+
+        hr {
+            border: 0px;
+            border-bottom: 1px solid #3d3d3d;
+            padding-top: 20px;
+        }
+
+        /* Use float property to make two-column layout */
+
+        .first-column {
+            float: left;
+            width: 48%;
+            padding-right: 20px;
+        }
+
+        .column {
+            float: left;
+            width: 48%;
+        }
+
+        /* Clear floats after the columns */
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .svg-title {
+            float: left;
+            display: inline-block;
+            width: 75px;
+            margin: -8px 10px -8px 0;
+        }
+
+        .svg-bullet {
+            float: left;
+            display: inline-block;
+            width: 18px;
+            margin: 0px 7px 0px 10px;
+        }
+
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+
+        img {
+            filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+            }
+        /* When browser is 800px wide or less */
+
+        @media screen and (max-width: 800px) {
+
+            .first-column,
+            .column {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <iframe src="map.html" width="100%" height="440px"></iframe>
+    <section><b>[Note: This is not the map you're looking for!]</b>
+        <a href='map.html'><i>Full-screen version</i></a> <br>(Zoom in as far as you can to get to the ground level imagery!)<br>
+        
+
+        
+        <h1><img src="images/SnowyOwlHead_AdobeStock_431140818.svg" class="svg-title">North American Snowy Owls</h1>
+        <hr>
+
+        <div class="row">
+            <div class="first-column">
+                <i>(below)</i> Small-scale map of the Snowy Owl range (to be prepared).
+                <h2><p>Snowy Owls are pretty cool and worthy of a good write up... (coming soon!)</p> </h2>
+                    
+                              </p><hr>
+
+                <h2>Add a map here...</h2><hr>
+                <h2>...and add a map there.</h2><hr>
+                <h3>Tools, citations, and methodology used in this project:</h3>
+                <ul>
+                    <li>Data accessed 15 December 2021.</li>
+                    <li>Snowy Owl location and migration path data comes from <a href="https://www.movebank.org/cms/webapp?gwt_fragment=page=studies,path=study12112706">Movebank.org</a> in coordination with the Max Planck Institute of Animal Behavior, the North Carolina Museum of Natural Sciences, and the University of Konstanz.</li>
+                    <li>The <a href="https://linuxmint.com/">Linux Mint 20.2</a> version of <a href="https://www.qgis.org">QGIS 3.22.1-Białowieża</a> was used to create static maps.</li>
+                    <li>A customized <a href="images/SnowyOwlHead_AdobeStock_245954980_Modified.svg" download>Scalable Vector Graphic (SVG) of a Snowy Owl icon</a><img src="images/SnowyOwlHead_AdobeStock_245954980_Modified.svg" class="svg-bullet">was created by modifying Adobe Stock graphic #245954980 in <a href="https://inkscape.org/">Inkscape 1.1.1</a> for use within QGIS and Mapbox.</li>
+                    <li><a href="https://github.com/VSCodium/vscodium">VSCodium 1.63.1</a> was used for coding/editing.</li>
+                    <li><a href="https://www.gitkraken.com/">GitKraken 8.2.0</a> used to interact with GitHub.</li>
+                    <li>Data is shown on <a href="https://www.mapbox.com/">Mapbox</a> web map with geolocation services enabled.</li>
+
+                    <li>This site is strictly for non-commercial use. Stock photos with open licencing was used as much as possible and are for illustrative and educational purposes with attribution and links to the original as applicable. If I have (inadvertently) violated Intellectual Property Rights, please let me know and I'll get it fixed!</li>
+                </ul>
+        
+                <h3>Project assets</h3>
+                <ul>
+                    <li><a href="geojson/SnowyOwl_NorthAmerica_(NoOutliers).geojson" download>GPS point location and migration track of Snowy Owls in this study (GeoJSON)</a></li>
+                </ul>       
+            </div>
+            <div class="column">
+                <div class="linkbox">
+                    
+                    <i>(below)</i> Wise looking white snowy Owl with big orange eyes portrait, black background, close up head shot. ©Tadej - Adobe stock photo #265113262.
+                    <br>
+                    <img class="max-image-width" src="images/AdobeStock_265113262.jpeg" title="Wise looking white snowy Owl with big orange eyes portrait, black background, close up head shot. ©Tadej - Adobe stock photo #265113262"></a>
+                    <hr>
+
+                    <i>(below)</i> Male Snowy owl (Bubo scandiacus) flies low hunting over an open sunny snowy cornfield in Ottawa, Canada. @Jim Cumming - Adobe stock photo #239834708.
+                    <br>
+                    <img class="max-image-width" src="images/AdobeStock_239834708.jpeg" title="Male Snowy owl (Bubo scandiacus) flies low hunting over an open sunny snowy cornfield in Ottawa, Canada. @Jim Cumming - Adobe stock photo #239834708"></a>
+                    <hr>
+
+                    <i>(below)</i> Snowy owl, Nyctea scandiaca, white rare bird flying in the dark forest, winter action scene with open wings, Canada. ©ondrejprosicky - Adobe stock photo #109767899.
+                    <br>
+                    <img class="max-image-width" src="images/AdobeStock_109767899.jpeg"
+                    title="Snowy owl, Nyctea scandiaca, white rare bird flying in the dark forest, winter action scene with open wings, Canada "></a>
+                    <hr>
+
+                    <i>(below)</i> Wise looking white snowy Owl with big orange eyes portrait, black background, close up head shot. ©Tadej - Adobe stock photo #164899662.
+                    <br>
+                    <img class="max-image-width" src="images/AdobeStock_164899662.jpeg" title="Wise looking white snowy Owl with big orange eyes portrait, black background, close up head shot. ©Tadej - Adobe stock photo #164899662"></a>
+                    <hr>
+
+                    <i>(below)</i> Male Snowy owl (Bubo scandiacus) flies low hunting over an open sunny snowy cornfield in Ottawa, Canada. @Jim Cumming - Adobe stock photo #238547054.
+                    <br>
+                    <img class="max-image-width" src="images/AdobeStock_238547054.jpeg" title="Male Snowy owl (Bubo scandiacus) flies low hunting over an open sunny snowy cornfield in Ottawa, Canada. @Jim Cumming - Adobe stock photo #238547054"></a>
+                    <hr>
+
+                
+
+                </div>
+             </div>
+        </div>
+            <hr>    
+            <img src="images/SnowyOwlHead_AdobeStock_245954980_Modified.svg" class="svg-bullet">Maps prepared by Sirius T. Bontea for the University of Kentucky, Department of Geography - New Maps Plus program.
+		        <br><img src="images/SnowyOwlHead_AdobeStock_245954980_Modified.svg" class="svg-bullet">Connect with me on <a href="https://www.linkedin.com/in/siriusbontea/">LinkedIn</a>:
+                <br><a href="https://www.linkedin.com/in/siriusbontea/"><img src="SiriusBonteaLinkedInQRcode150px.png" alt="Sirius T. Bontea @ LinkedIn" hspace="50"></a>
+			    <br><img src="images/SnowyOwlHead_AdobeStock_245954980_Modified.svg" class="svg-bullet">Stay tuned for some interesting projects as I apply new skills gained from the New Maps Plus!
+                <br><img src="images/SnowyOwlHead_AdobeStock_245954980_Modified.svg" class="svg-bullet">Updated on 15 December 2021.
+			<hr>
+		<a href="https://uky-gis.github.io"><img width="20%"
+				src="https://uky-gis.github.io/graphics/logo-color-400px.png"
+				alt="University of Kentucky Geography"></a>
+		<a href="https://newmapsplus.as.uky.edu"><img width="15%"
+				src="https://newmapsplus.as.uky.edu/sites/default/files/NMP%20Logo.png" alt="New Maps Plus"></a>
+    </section>
+</body>
+</html>
+
