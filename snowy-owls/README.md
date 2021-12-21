@@ -18,6 +18,6 @@
 1:50m Gray Earth basemap, geographical name locations, rivers and lakes are from [NaturalEarthData.com](https://www.naturalearthdata.com/downloads/).
 * Sea Ice Extent shapefiles are from the [National Snow & Ice Data Center](https://nsidc.org/data/seaice_index/archives).
 * Terrestrial Ecoregions GIS Data from [GIS Lounge](https://www.gislounge.com/terrestrial-ecoregions-gis-data/).
-* The projected coordinate reference systems used in the static maps is the WGS 84 Canada Atlas Labert Conformal Conic (ESRI: 102215) and WGS 84 Canada Polar Stereographic (EPSG: 5937).
+* The projected coordinate reference systems used in the static maps are the WGS 84 Canada Atlas Labert Conformal Conic (ESRI: 102215) and WGS 84 Canada Polar Stereographic (EPSG: 5937).
 * Stock photos with open licensing were used as much as possible and are for illustrative and educational purposes with attribution and links to the original sources as applicable.
 
