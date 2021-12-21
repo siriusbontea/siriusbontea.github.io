@@ -1,4 +1,4 @@
-# North American Snowy Owls
+# [<img src="images/SnowyOwlHead_AdobeStock_431140818.svg" width="50 px"/>](images/images/SnowyOwlHead_AdobeStock_431140818.svg)North American Snowy Owls
 ## Mapping Snowy Owl distribution and travels, plus a few other fun facts!
 * Final Project by Sirius T. Bontea for the University of Kentucky, Department of Geography - New Maps Plus program to fulfil the requirements for MAP671: Introduction to New Mapping (Fall 20210) course.
 * Project updated 20 December 2021.
