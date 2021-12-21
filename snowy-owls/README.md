@@ -8,7 +8,7 @@
 ## Tools, citations, and methodology used in this project:
 
 * The [Linux Mint 20.2](https://linuxmint.com/) version of [QGIS 3.22.1-Białowieża](https://www.qgis.org) was used to create static maps.
-* A customized Scalable Vector Graphic (SVG) of a Snowy Owl icon was created by modifying Adobe Stock graphic #245954980 in [Inkscape 1.1.1](https://inkscape.org/) for use within QGIS and Mapbox.
+* A customized Scalable Vector Graphic (SVG) of a Snowy Owl icon ![Snowy Owl icon](images/SnowyOwlHead_AdobeStock_245954980_Modified.svg) was created by modifying Adobe Stock graphic #245954980 in [Inkscape 1.1.1](https://inkscape.org/) for use within QGIS and Mapbox.
 * [ArcGIS Pro 2.9](https://www.esri.com/en-us/arcgis/products/arcgis-pro/overview) on a Windows 10 [Virtual Machine](https://www.virtualbox.org/) was used to create the Snowy Owl distribution heat map.
 * [VSCodium 1.63.1](https://github.com/VSCodium/vscodium) was used for coding/editing.
 * [GitKraken 8.2.0](https://www.gitkraken.com/) used to interact with GitHub.
