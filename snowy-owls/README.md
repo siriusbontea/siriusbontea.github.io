@@ -1,7 +1,8 @@
-### North American Snowy Owls
-# Mapping Snowy Owl distribution and travels, plus a few other fun facts!
-Link to [project website](https://siriusbontea.github.io/snowy-owls/)
-# Project updated 20 December 2021.
+# North American Snowy Owls
+## Mapping Snowy Owl distribution and travels, plus a few other fun facts!
+### Project updated 20 December 2021.
+* Link to [project website](https://siriusbontea.github.io/snowy-owls/).
+
 
 ## Tools, citations, and methodology used in this project:
 
