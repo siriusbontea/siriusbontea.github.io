@@ -1,4 +1,4 @@
-# [<img src="images/SnowyOwlHead_AdobeStock_431140818.svg" width="50 px"/>](images/images/SnowyOwlHead_AdobeStock_431140818.svg)North American Snowy Owls
+# [<img src="images/SnowyOwlHead_AdobeStock_431140818.svg" width="55 px"/>](images/images/SnowyOwlHead_AdobeStock_431140818.svg) North American Snowy Owls
 ## Mapping Snowy Owl distribution and travels, plus a few other fun facts!
 * Final Project by Sirius T. Bontea for the University of Kentucky, Department of Geography - New Maps Plus program to fulfil the requirements for MAP671: Introduction to New Mapping (Fall 20210) course.
 * Project updated 20 December 2021.
@@ -19,4 +19,5 @@
 * Sea Ice Extent shapefiles are from the [National Snow & Ice Data Center](https://nsidc.org/data/seaice_index/archives).
 * Terrestrial Ecoregions GIS Data from [GIS Lounge](https://www.gislounge.com/terrestrial-ecoregions-gis-data/).
 * The projected coordinate reference systems used in the static maps is the WGS 84 Canada Atlas Labert Conformal Conic (ESRI: 102215) and WGS 84 Canada Polar Stereographic (EPSG: 5937).
+* Stock photos with open licensing were used as much as possible and are for illustrative and educational purposes with attribution and links to the original sources as applicable.
 
