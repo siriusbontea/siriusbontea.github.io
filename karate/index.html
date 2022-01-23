@@ -339,7 +339,7 @@
       <a href="nano_photos_provider2/nano_photos_content/AdobeStock_129293872.jpeg"
         data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_129293872.jpeg"> Underwater Cave </a>
       <a href="nano_photos_provider2/nano_photos_content/AdobeStock_131102573.jpeg"
-        data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_131102573.jpeg"> Churaumi2
+        data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_131102573.jpeg"> Churaumi
         Aquarium</a>
       <a href="nano_photos_provider2/nano_photos_content/AdobeStock_142799366.jpeg"
         data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_142799366.jpeg"> Kouri Island and Bridge </a>
@@ -418,7 +418,9 @@
     <div class="first-column">
       <h3 style="padding-inline: 5%;">Project Notes:</h3>
       <ul style="padding-inline: 10%;">
-        <li>This webpage was built to meet requirements for the <a href="https://newmapsplus.github.io/map672/syllabus/">MAP 672: Programming For Web Mapping</a> course at the <a href="https://newmapsplus.as.uky.edu/">University of Kentucky</a>.</li>
+        <li>This webpage was built to meet requirements for the <a
+            href="https://newmapsplus.github.io/map672/syllabus/">MAP 672: Programming For Web Mapping</a> course at the
+          <a href="https://newmapsplus.as.uky.edu/">University of Kentucky</a>.</li>
       </ul>
       <h3 style="padding-inline: 5%;">Tools, citations, and methodology used in this project:</h3>
       <ul style="padding-inline: 10%;">
@@ -439,7 +441,7 @@
             href="https://github.com/ritwickdey/vscode-live-server">Live Server</a>.
         <li>We had to wake the <a href="https://www.gimp.org/">GNU Image Manipulator (GIMP) 2.10.30</a> from its slumber
           for raster image editing.</li>
-        <li><a href="https://inkscape.org/release/inkscape-1.1.1/">Inkscape 1.1.1</a> was used for vector image editing.
+        <li><a href="https://inkscape.org/release/inkscape-1.1.1/">Inkscape 1.1.1</a> was used for vector image editing. The "karateka" map icons were derived from AdobeStock_5354979.jpeg and coverted to a SVG for use on the map. 
         </li>
         <li><a href="https://imagemagick.org/">ImageMagick 7.1.0-19</a> was used for batch image processing.</li>
         <li>Code from <a href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">Leaflet 1.7.1</a> using the <a
@@ -456,9 +458,9 @@
           down to conserve bandwidth and their original filenames were preserved for easy referencing to their
           respective high-resolution source.</li>
         <li>Data accessed 21 January 2022.</li>
-        </ul>
-        <h3 style="padding-inline: 5%;">Book references:</h3>
-        <ul style="padding-inline: 10%;">
+      </ul>
+      <h3 style="padding-inline: 5%;">Book references:</h3>
+      <ul style="padding-inline: 10%;">
         <li><sup>1</sup> Funakoshi, Gishin (1988). Karate-do Nyumon. Japan. ISBN 4-7700-1891-6. (pg 24)</li>
         <li><sup>2</sup> Higaonna, Morio (1985). Traditional Karatedo Vol. 1 Fundamental Techniques. ISBN 0-87040-595-0.
           (pg 19)</li>
@@ -529,8 +531,8 @@
   <!-- Start of Leaflet code -->
   <script>
     var map = new L.Map('map', {
-      center: new L.LatLng(26.35, 127.7536),
-      zoom: 9
+      center: new L.LatLng(26.25,127.79),
+      zoom: 11
     });
     map.attributionControl.setPrefix('');
 
@@ -542,11 +544,45 @@
         maxZoom: 18
       });
 
-    L.marker([26.211, 127.680]).addTo(map)
-      .bindPopup('Okinawa, the birth place of karate!')
+    L.marker([26.3192537,127.7957346]).addTo(map)
+      .bindPopup('<center><b>Okinawa, the birth place of karate!</b><br>(click on the karateka icons to learn more)</center>')
       .openPopup();
 
     map.addLayer(layer);
+
+    var greenIcon = L.icon({
+      iconUrl: 'images/karateka_green.svg',
+      iconSize: [75, 150], // size of the icon
+      iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+    L.marker([26.2109027,127.6671496], {
+      icon: greenIcon
+    }).addTo(map)
+    .bindPopup("<b>Naha-te came from here!</b>");
+
+    var redIcon = L.icon({
+      iconUrl: 'images/karateka_red.svg',
+      iconSize: [75, 150], // size of the icon
+      iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+    L.marker([26.216076,127.71603], {
+      icon: redIcon
+    }).addTo(map)
+    .bindPopup("<b>Shuri-te came from here!</b>");
+
+    var purpleIcon = L.icon({
+      iconUrl: 'images/karateka_purple.svg',
+      iconSize: [75, 150], // size of the icon
+      iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+    L.marker([26.132364,127.7209671], {
+      icon: purpleIcon
+    }).addTo(map)
+    .bindPopup("<b>Tomori-te came from here!</b>");
+
   </script>
   <!-- End of Leaflet code -->
 
