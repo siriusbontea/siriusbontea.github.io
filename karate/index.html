@@ -239,7 +239,8 @@
           the Ryukyu Islands is debated amongst archaeologists. However, current fossil evidence sets the timeline of
           human settlements to the palaeolithic period going back at least 32,000 years.</p>
         <p>As far as we know, martial arts in Okinawa, particularly karate, doesn't go back to palaeolithic times. In
-          fact, the current form of the term <i>karate</i> is modern, dating to the turn of the twentieth century. The
+          fact, the current rendering of the term <i>karate</i> is modern, dating to the turn of the twentieth century.
+          The
           modern rendition of <i>kara</i> (空) meaning "empty", and <i>te</i> (手) meaning "hand", dates dates to about
           1935—a homophone of a much older term <i>karate</i> (唐手), literally meaning "Tang Dynasty hand" or more
           colloquially, "martial arts from China" goes back well over a thousand years.</p>
@@ -418,7 +419,7 @@
     <div class="first-column">
       <h3 style="padding-inline: 5%;">Project Notes:</h3>
       <ul style="padding-inline: 10%;">
-        <li>This webpage was built to meet requirements for the <a
+        <li>This webpage was built to meet requirements for Module 1 of the <a
             href="https://newmapsplus.github.io/map672/syllabus/">MAP 672: Programming For Web Mapping</a> course at the
           <a href="https://newmapsplus.as.uky.edu/">University of Kentucky</a>.</li>
       </ul>
@@ -441,7 +442,8 @@
             href="https://github.com/ritwickdey/vscode-live-server">Live Server</a>.
         <li>We had to wake the <a href="https://www.gimp.org/">GNU Image Manipulator (GIMP) 2.10.30</a> from its slumber
           for raster image editing.</li>
-        <li><a href="https://inkscape.org/release/inkscape-1.1.1/">Inkscape 1.1.1</a> was used for vector image editing. The "karateka" map icons were derived from AdobeStock_5354979.jpeg and coverted to a SVG for use on the map. 
+        <li><a href="https://inkscape.org/release/inkscape-1.1.1/">Inkscape 1.1.1</a> was used for vector image editing.
+          The "karateka" map icons were derived from AdobeStock_5354979.jpeg and coverted to a SVG for use on the map.
         </li>
         <li><a href="https://imagemagick.org/">ImageMagick 7.1.0-19</a> was used for batch image processing.</li>
         <li>Code from <a href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">Leaflet 1.7.1</a> using the <a
@@ -531,7 +533,7 @@
   <!-- Start of Leaflet code -->
   <script>
     var map = new L.Map('map', {
-      center: new L.LatLng(26.25,127.79),
+      center: new L.LatLng(26.25, 127.79),
       zoom: 11
     });
     map.attributionControl.setPrefix('');
@@ -544,8 +546,9 @@
         maxZoom: 18
       });
 
-    L.marker([26.3192537,127.7957346]).addTo(map)
-      .bindPopup('<center><b>Okinawa, the birth place of karate!</b><br>(click on the karateka icons to learn more)</center>')
+    L.marker([26.3192537, 127.7957346]).addTo(map)
+      .bindPopup(
+        '<center><b>Okinawa, the birth place of karate!</b><br>(click on the karateka icons to learn more)</center>')
       .openPopup();
 
     map.addLayer(layer);
@@ -556,10 +559,10 @@
       iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
       popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
-    L.marker([26.2109027,127.6671496], {
-      icon: greenIcon
-    }).addTo(map)
-    .bindPopup("<b>Naha-te came from here!</b>");
+    L.marker([26.2109027, 127.6671496], {
+        icon: greenIcon
+      }).addTo(map)
+      .bindPopup("<b>Naha-te came from here!</b>");
 
     var redIcon = L.icon({
       iconUrl: 'images/karateka_red.svg',
@@ -567,10 +570,10 @@
       iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
       popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
-    L.marker([26.216076,127.71603], {
-      icon: redIcon
-    }).addTo(map)
-    .bindPopup("<b>Shuri-te came from here!</b>");
+    L.marker([26.216076, 127.71603], {
+        icon: redIcon
+      }).addTo(map)
+      .bindPopup("<b>Shuri-te came from here!</b>");
 
     var purpleIcon = L.icon({
       iconUrl: 'images/karateka_purple.svg',
@@ -578,11 +581,10 @@
       iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
       popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
-    L.marker([26.132364,127.7209671], {
-      icon: purpleIcon
-    }).addTo(map)
-    .bindPopup("<b>Tomori-te came from here!</b>");
-
+    L.marker([26.132364, 127.7209671], {
+        icon: purpleIcon
+      }).addTo(map)
+      .bindPopup("<b>Tomori-te came from here!</b>");
   </script>
   <!-- End of Leaflet code -->
 
