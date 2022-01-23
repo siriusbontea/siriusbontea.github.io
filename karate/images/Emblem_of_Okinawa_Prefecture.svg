@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.0"
+   width="400"
+   height="400"
+   id="Flag_of_Japan">
+  <defs
+     id="defs1313" />
+  <circle
+     cx="450"
+     cy="300"
+     r="180"
+     transform="matrix(1.1111111,0,0,1.1111111,-300.00001,-133.33334)"
+     style="fill:#c90037;fill-opacity:1"
+     id="circle3940" />
+  <circle
+     cx="450"
+     cy="300"
+     r="180"
+     transform="matrix(0.7777775,0,0,0.7777775,-149.99983,-73.333267)"
+     style="fill:#ffffff"
+     id="circle1317" />
+  <circle
+     cx="450"
+     cy="300"
+     r="180"
+     transform="matrix(0.4999999,0,0,0.4999999,-24.999911,-20.000021)"
+     style="fill:#c90037;fill-opacity:1"
+     id="circle2192" />
+</svg>

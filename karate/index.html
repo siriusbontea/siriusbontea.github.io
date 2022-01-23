@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8 />
+  <title>Okinawa, Japan</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <link rel='icon' href='https://newmapsplus.github.io/favicon.ico' type='image/x-icon' />
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" rel="stylesheet" />
+  <link href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" rel="stylesheet" />
+
+  <link href="https://fonts.googleapis.com/css?family=Eczar:600|Merriweather" rel="stylesheet">
+
+  <!-- added per Leatlet Quick Start Guide -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+
+  <!-- start frontloaded JavaScript -->
+  <!-- jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- nanogallery2 loaded after jQuery -->
+  <link href="css/nanogallery2.min.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="scripts/jquery.nanogallery2.min.js"></script>
+  <!-- end frontloaded JavaScript -->
+
+  <style>
+    body {
+      margin: 2;
+      padding: 3;
+      background: #fffff6;
+      font-family: 'Merriweather', serif;
+      font-weight: 300;
+      color: #000000;
+      font-size: 100%;
+    }
+
+    section {
+      width: 80%;
+      margin: 10px auto;
+    }
+
+    h1 {
+      font-size: 3em;
+      padding-left: 40px;
+      font-weight: 900;
+      font-family: 'Eczar', serif;
+      letter-spacing: .04em;
+      text-shadow: 3px 3px 3px #696969;
+      text-align: center;
+      margin: 10px auto;
+    }
+
+    h2 {
+      font-size: 2em;
+      font-weight: 300;
+      font-family: 'Eczar', serif;
+      letter-spacing: .04em;
+      text-shadow: 2px 2px 2px #696969;
+      text-align: center;
+      margin: .5em .5em .5em .5em;
+    }
+
+    h3 {
+      font-size: 1.5em;
+      font-weight: 300;
+      font-family: 'Eczar', serif;
+      letter-spacing: .04em;
+      text-align: left;
+      margin: .5em .5em .5em .5em;
+    }
+
+    p {
+      font-size: 1.3em;
+      line-height: 1.5em;
+      text-align: justify;
+      font-family: 'Merriweather', serif;
+    }
+
+    sup {
+      vertical-align: super;
+      font-size: smaller;
+    }
+
+    a {
+      color: #8a0000;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: #ff0000;
+    }
+
+    ul {
+      padding: 0px 25px 9px 30px;
+      line-height: 1.6em;
+    }
+
+    li {
+      margin: 6px 0
+    }
+
+    hr {
+      margin: 20px 0;
+      border: 0;
+      height: 1px;
+      background: #979797;
+    }
+
+    table,
+    th,
+    td {
+      border: none;
+    }
+
+    table.center {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .marginauto {
+      margin: 10px auto 20px;
+      display: block;
+    }
+
+    .caption {
+      margin: 0 0 20px 0;
+      display: block;
+      text-shadow: 1px 1px 1px #696969;
+    }
+
+    #map {
+      width: 100%;
+      height: 540px;
+      margin: 10px auto;
+      border: 1px solid #000000;
+      filter: drop-shadow(0.35rem 0.35rem 0.4rem #696969);
+    }
+
+    .highlight {
+      color: #a00c0a;
+      font-weight: bold;
+    }
+
+    img {
+      filter: drop-shadow(0.35rem 0.35rem 0.4rem #696969);
+    }
+
+    .img-fill {
+      width: 100%;
+      height: auto;
+      margin: 10px 0;
+    }
+
+    .img-tn {
+      height: 100%;
+      width: 100%;
+      margin: 10px 0;
+    }
+
+    .img-border {
+      border: 1px solid #000000;
+    }
+
+    .svg-title {
+      float: none;
+      vertical-align: text-top;
+      width: 80px;
+      margin: 4px 10px -8px 0;
+    }
+
+    .svg-bullet {
+      float: none;
+      display: inline;
+      width: 18px;
+      margin: 0px 7px 0px 2px;
+    }
+
+    #gallery img {
+      opacity: 0.8;
+      cursor: pointer;
+    }
+
+    #gallery img:hover {
+      opacity: 1
+    }
+
+    /* Use float property to make two-column layout */
+    .first-column {
+      float: left;
+      width: 49%;
+      padding-right: 2%;
+    }
+
+    .second-column {
+      float: left;
+      width: 49%;
+    }
+
+    /* Clear floats after columns */
+    .row::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    @media screen and (max-width: 900px) {
+
+      .first-column,
+      .second-column {
+        width: 100%;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <header>
+    <h1><img src="images/Emblem_of_Okinawa_Prefecture.svg" class="svg-title"> Okinawa, Japan <img
+        src="images/Hidari_mitsudomoe.svg" class="svg-title"></h1>
+  </header>
+
+  <section>
+    <div id="map"></div>
+
+    <!-- Start row -->
+    <div class="row">
+
+      <!-- Start left column -->
+      <div class="first-column">
+        <h2>Okinawa, the birth place of karate!</h2>
+        <p>Okinawa is the largest island in the Ryukyu chain and stretches from Kyushu to Taiwan. Though part of Japan,
+          the people and culture are uniquely different from mainland Japan. The question of when humans first settled
+          the Ryukyu Islands is debated amongst archaeologists. However, current fossil evidence sets the timeline of
+          human settlements to the palaeolithic period going back at least 32,000 years.</p>
+        <p>As far as we know, martial arts in Okinawa, particularly karate, doesn't go back to palaeolithic times. In
+          fact, the current form of the term <i>karate</i> is modern, dating to the turn of the twentieth century. The
+          modern rendition of <i>kara</i> (空) meaning "empty", and <i>te</i> (手) meaning "hand", dates dates to about
+          1935—a homophone of a much older term <i>karate</i> (唐手), literally meaning "Tang Dynasty hand" or more
+          colloquially, "martial arts from China" goes back well over a thousand years.</p>
+        <p>Historically, when broadly referring to the martial arts from Okinawa, the term Okinawa-te was
+          used.<sup>1</sup> Various styles of Okinawa-te differed depending on which master was teaching it, and the
+          terminology used to distinguish the styles were often based on the name of the town it emerged from. For
+          example, the karate style originating from Naha City was called "Naha-te", with Tomori-te and Shuri-te being
+          the other two dominant styles. The recent change to the "empty hands" karate (空手) term was due to political
+          friction between China and Japan in the 1930s and survived to become today's de-facto standard
+          term.<sup>2</sup></p>
+        <p> Over the course of many centuries, the people of the Ryukyu islands developed a rich and far-reaching
+          culture that has influenced the entire
+          world.
+          If you think I'm referring to karate, you'd be correct. However, modern Okinawans have much more to teach
+          the world besides karate. One well-known fact is that the people of Japan have the world's longest life
+          expectancy. However, did you know that Okinawans were pulling more than their fair share when calculating
+          those
+          numbers? As a matter of fact, when comparing Okinawans to other Japanese natives, there are <i>five times</i>
+          as many
+          Okinawans who live to 100 years old!</p>
+        <p>Is it the karate? Is it the healthy food? Surely, one way to find answers is to
+          visit this remarkable place first hand.</p>
+
+        <!-- End first column -->
+      </div>
+
+      <!-- Start right column -->
+      <div class="second-column">
+        <div id="photo">
+          <div style="text-align:center" id="caption"></div>
+        </div>
+
+        <div id="gallery" style="text-align:center">
+          <table>
+            <td style="vertical-align: middle; width: 20%;"><img src="photos/KarateClass_Hawaii-circa1994.png"
+                alt="Photo of author with Sensei and fellow students at a Dojo in Hilo, Hawai`i where they trained in one of the main traditional Okinawan styles of karate known as Gōjū-ryū (剛柔流). Two students earned their green belts that day - circa 1994."
+                class="img-tn img-border"></td>
+            <td style="vertical-align: middle; width: 20%;"><img src="photos/KarateClass_Hawaii-circa1995.png"
+                alt="Photo of author at his Dojo in Hilo, Hawai`i. Here, the students are participating in 'randori' (乱取り) or free-style sparring practice - circa 1995."
+                class="img-tn img-border"></td>
+            <td style="vertical-align: middle; width: 20%;"><img src="photos/SiriusBontea_Hawaii-circa1996.png"
+                alt="Photo of author in front of his humble abode in Hilo, Hawai`i - circa 1996."
+                class="img-tn img-border"></td>
+            <td style="vertical-align: middle; width: 20%;"><img src="photos/Sirius_and_Bear_Kansas-circa2021.png"
+                alt="Photo of author and son at their home on Fort Leavenworth, Kansas - circa 2021."
+                class="img-tn img-border"></td>
+
+            <td style="vertical-align: middle; width: 20%;"><img src="photos/Sirius_and_BearKick_Kansas-circa2021.png"
+                alt="Photo of author and son in Fort Leavenworth, Kansas. Here, the handsome young man is executing a 'mae geri' or front kick whilst being mindful of keeping his hands up to protect his face - circa 2021."
+                class="img-tn img-border"></td>
+          </table>
+        </div>
+      </div>
+      <table style="background-color:#fff5c6; border: none; font-size: 1.2em;
+      line-height: 1.5em; text-align: justify; font-family: 'Merriweather', serif; padding: 2%;">
+        <tr>
+          <th>If you're interested in learning about the traditional Okinawan karate style of Gōjū-ryū in particular,
+            there's a <a href="https://www.grkc1978.com/">fantastic dojo out of Johannesburg, South Africa</a> that
+            posts
+            free instructional videos every week that are easily accessible and useful to both beginner students as well
+            as the
+            seasoned karate practioner. Be sure to check out the <a
+              href="https://www.youtube.com/channel/UCy61L8jq6ugyEwGNwMdVZhA">Goju Ryu Karate Centre's YouTube
+              channel</a>
+            online, or drop by in person if you happen to be in the area. The folks there are awesome! Wherever your
+            world travels take you, you'll be able to find some form of Okinawan karate being taught.</th>
+        </tr>
+      </table>
+      <!-- End right column -->
+    </div>
+
+    <!-- End row column -->
+    </div>
+    <!-- start of nanogallery2 -->
+    <h2> Here is small sample of photos on what Okinawa has to offer!</h2>
+    <div id="my_nanogallery2" data-nanogallery2>
+
+      <a href="nano_photos_provider2/nano_photos_content/AdobeStock_10189494.jpeg"
+        data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_10189494.jpeg"> Okinawa awamori </a>
+      <a href="nano_photos_provider2/nano_photos_content/AdobeStock_47129268.jpeg"
+        data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_47129268.jpeg"> Shuri Castle </a>
+      <a href="nano_photos_provider2/nano_photos_content/AdobeStock_76872329.jpeg"
+        data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_76872329.jpeg"> Tropical Lagoon Beach </a>
+      <a href="nano_photos_provider2/nano_photos_content/AdobeStock_80564323.jpeg"
+        data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_80564323.jpeg"> Iriomote Island </a>
+      <a href="nano_photos_provider2/nano_photos_content/AdobeStock_100533318.jpeg"
+        data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_100533318.jpeg"> Ishikage Island
+      </a>
+      <a href="nano_photos_provider2/nano_photos_content/AdobeStock_114748679.jpeg"
+        data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_114748679.jpeg"> Colony of Anemone Fish </a>
+      <a href="nano_photos_provider2/nano_photos_content/AdobeStock_129293872.jpeg"
+        data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_129293872.jpeg"> Underwater Cave </a>
+      <a href="nano_photos_provider2/nano_photos_content/AdobeStock_131102573.jpeg"
+        data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_131102573.jpeg"> Churaumi2
+        Aquarium</a>
+      <a href="nano_photos_provider2/nano_photos_content/AdobeStock_142799366.jpeg"
+        data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_142799366.jpeg"> Kouri Island and Bridge </a>
+      <a href="nano_photos_provider2/nano_photos_content/AdobeStock_144198998.jpeg"
+        data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_144198998.jpeg"> Skyline of Naha City </a>
+      <a href="nano_photos_provider2/nano_photos_content/AdobeStock_158320440.jpeg"
+        data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_158320440.jpeg"> Naha City Monorail
+      </a>
+      <a href="nano_photos_provider2/nano_photos_content/AdobeStock_162136499.jpeg"
+        data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_162136499.jpeg"> American Village
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_163151429.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_163151429.jpeg"> American Village </a>
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_164332221.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_164332221.jpeg"> Fishes Living in Corals
+        </a>
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_191548569.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_191548569.jpeg"> Aerial View of Okinawa
+        </a>
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_195136502.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_195136502.jpeg"> Aharen Beach, Tokashiki
+          Island</a>
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_196085340.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_196085340.jpeg"> Tokashiki Island
+        </a>
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_199949914.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_199949914.jpeg"> American Village </a>
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_222324105.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_222324105.jpeg"> Tomari Fish Market </a>
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_224455917.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_224455917.jpeg"> Okinawa cuisine pork belly
+        </a>
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_228444262.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_228444262.jpeg"> Kabira Bay, Ishikagi
+          Island
+        </a>
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_253232772.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_253232772.jpeg"> Okinawa cuisine </a>
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_269050003.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_269050003.jpeg"> Kyukeimon Gate, Shuri
+          Castle </a>
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_284044118.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_284044118.jpeg"> Zamami Island, Okinawa
+        </a>
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_293928712.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_293928712.jpeg"> Kankaimon Gate, Okinawa
+        </a>
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_293928752.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_293928752.jpeg"> Shuri Castle, Okinawa </a>
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_300114555.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_300114555.jpeg"> Snake Wine
+        </a>
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_302802426.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_302802426.jpeg"> Okinawa cuisine </a>
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_302802596.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_302802596.jpeg"> Okinawa cuisine </a>
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_302802670.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_302802670.jpeg"> Okinawa cuisine </a>
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_302808340.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_302808340.jpeg"> Lanterns on a beach </a>
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_408798371.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_408798371.jpeg"> Tropical Dream Center</a>
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_424324616.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_424324616.jpeg"> Tsukihama beach </a>
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_460948370.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_460948370.jpeg"> coral reef with fish </a>
+        <a href="nano_photos_provider2/nano_photos_content/AdobeStock_466833196.jpeg"
+          data-ngThumb="nano_photos_provider2/nano_photos_content/AdobeStock_466833196.jpeg"> Onna Son</a>
+    </div>
+
+    <!-- end of nanogallery2 -->
+  </section>
+  <hr>
+
+  <!-- START OF FOOTER SECTION -->
+  <footer>
+    <div class="first-column">
+      <h3 style="padding-inline: 5%;">Project Notes:</h3>
+      <ul style="padding-inline: 10%;">
+        <li>This webpage was built to meet requirements for the <a href="https://newmapsplus.github.io/map672/syllabus/">MAP 672: Programming For Web Mapping</a> course at the <a href="https://newmapsplus.as.uky.edu/">University of Kentucky</a>.</li>
+      </ul>
+      <h3 style="padding-inline: 5%;">Tools, citations, and methodology used in this project:</h3>
+      <ul style="padding-inline: 10%;">
+
+        <li>All tools used in this project were ran using the <a
+            href="https://freebsdfoundation.org/freebsd-project/what-is-freebsd/">FreeBSD 13-RELEASE</a> Operating
+          System.
+        </li>
+        <!--
+           <li><a href="https://www.qgis.org/en/site/forusers/alldownloads.html#freebsd">QGIS 3.22.3-Białowieża</a> was used to build the static maps.</li> 
+        -->
+        <li><a href="https://github.com/microsoft/vscodeVisual">Visual Studio Code - Open Source ("Code - OSS")
+            1.63.2</a> was used for all coding with the following plugins installed: <a
+            href="https://beautifier.io/">Beautify</a>, <a href="https://github.com/mhutchie/vscode-git-graph">Git
+            Graph</a>, <a href="https://github.com/felipecaputo/git-project-manager">Git Project Manager</a>, <a
+            href="https://github.com/github/gitignore">gitignore</a>, <a
+            href="https://github.com/gitkraken/vscode-gitlens">GitLens — Git supercharged</a>, and <a
+            href="https://github.com/ritwickdey/vscode-live-server">Live Server</a>.
+        <li>We had to wake the <a href="https://www.gimp.org/">GNU Image Manipulator (GIMP) 2.10.30</a> from its slumber
+          for raster image editing.</li>
+        <li><a href="https://inkscape.org/release/inkscape-1.1.1/">Inkscape 1.1.1</a> was used for vector image editing.
+        </li>
+        <li><a href="https://imagemagick.org/">ImageMagick 7.1.0-19</a> was used for batch image processing.</li>
+        <li>Code from <a href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">Leaflet 1.7.1</a> using the <a
+            href="https://www.thunderforest.com/maps/mobile-atlas/">Thunderforest Mobile Atlas</a> base map was used to
+          create the interactive webmap.</li>
+        <li>Code from <a href="https://nanogallery2.nanostudio.org/">nanogallery2 3.0.5</a> was used to create lightbox
+          gallery.</li>
+        <li>Code from <a href="http://code.jquery.com/">jQuery 3.6.0</a> is front loaded to enable effects in Leaflet
+          and nanogallery2 code.</li>
+        <li>All photographs of Okinawa on this page are from the <a href="https://stock.adobe.com/">Adobe Stock
+            Photo</a> collection and are royalty free through <a
+            href="https://stock.adobe.com/enterprise-conditions#extendedLicenses">Adobe's extended license</a> and made
+          accessible through the <a href="https://www.uky.edu/">University of Kentucky</a>. These photos were scaled
+          down to conserve bandwidth and their original filenames were preserved for easy referencing to their
+          respective high-resolution source.</li>
+        <li>Data accessed 21 January 2022.</li>
+        </ul>
+        <h3 style="padding-inline: 5%;">Book references:</h3>
+        <ul style="padding-inline: 10%;">
+        <li><sup>1</sup> Funakoshi, Gishin (1988). Karate-do Nyumon. Japan. ISBN 4-7700-1891-6. (pg 24)</li>
+        <li><sup>2</sup> Higaonna, Morio (1985). Traditional Karatedo Vol. 1 Fundamental Techniques. ISBN 0-87040-595-0.
+          (pg 19)</li>
+
+
+      </ul>
+    </div>
+
+    <div class="second-column">
+      <h3 style="text-align: center;">About the author:</h3>
+      <table class="center">
+        <tr>
+          <th><img src="photos/profile_pic_bw.png"></th>
+        </tr>
+        <tr>
+
+          <td style="padding-right: 20%; padding-left: 20%; text-align: justify; font-family: 'Eczar';">An artist,
+            scientist, bibliophile, and autodidact at heart, Sirius enjoys applying these facets
+            in his role of dad and husband first and foremost. He also finds happiness with spending time with Shin'yū
+            the
+            Maltipoo (Shin'yū or 親友 is the Japanese term for "best friend"). Sirius also enjoys calligraphy,
+            metacognition, philosophy, and the pursuit of arcane knowledge regardless of the path it puts him on. He
+            generally prefers Open Source Software solutions such as FreeBSD for daily computing, QGIS for cartography
+            and
+            geospatial analysis, GIMP and Inkscape for image manipulation. However, he is no stranger to proprietary
+            solutions such as ArcGIS Pro, Adobe Photoshop and Illustrator.
+          </td>
+        <tr>
+          <td style="text-align: center;"><br>Connect with <a
+              href="https://www.linkedin.com/in/siriusbontea/">@SiriusBontea</a> on LinkedIn:</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; padding-bottom: 7%;"><a href="https://www.linkedin.com/in/siriusbontea/"><img
+                src="images/SiriusBonteaLinkedInQRcode150px.png" alt="Sirius T. Bontea @ LinkedIn"></a></td>
+        </tr>
+
+        </tr>
+      </table>
+    </div>
+    <!-- Start of UKy items-->
+    <div class="row::after">
+      <div>
+        <a href="https://newmapsplus.github.io">
+          <img src="https://newmapsplus.github.io/assets/graphics/logo-2018-nmp-75px-h-gray.png"
+            alt="University of Kentucky New Maps Plus" class="marginauto">
+        </a>
+
+        <a href="https://uky-gis.github.io">
+          <img src="https://newmapsplus.github.io/assets/graphics/logo-2018-geography-75px-h.png"
+            alt="University of Kentucky Department of Geography" class="marginauto">
+        </a>
+      </div>
+    </div>
+  </footer>
+  <!-- END OF FOOTER SECTION -->
+
+  <!-- START OF JAVA SCRIPT CODE -->
+
+  <!-- Start of External JS sources -->
+
+  <!-- Leaflet -->
+  <script type="text/javascript" src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+
+  <!-- End of External JS sources -->
+
+  <!-- Start of Leaflet code -->
+  <script>
+    var map = new L.Map('map', {
+      center: new L.LatLng(26.35, 127.7536),
+      zoom: 9
+    });
+    map.attributionControl.setPrefix('');
+
+    var tileUrl =
+      'https://tile.thunderforest.com/mobile-atlas/{z}/{x}/{y}{r}.png?apikey=ef45178e209e461983726086cb45354d',
+
+      layer = new L.TileLayer(tileUrl, {
+        attribution: '<a href="https://leafletjs.com/">Leaflet</a> | Maps &copy; <a href="https://www.thunderforest.com">Thunderforest</a>, Data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>',
+        maxZoom: 18
+      });
+
+    L.marker([26.211, 127.680]).addTo(map)
+      .bindPopup('Okinawa, the birth place of karate!')
+      .openPopup();
+
+    map.addLayer(layer);
+  </script>
+  <!-- End of Leaflet code -->
+
+  <!-- Start of nanoPhotosProvider2 code -->
+  <script>
+    jQuery(document).ready(function () {
+      jQuery("#my_nanogallery").nanogallery2({
+        thumbnailWidth: 'auto',
+        thumbnailHeight: 150,
+        kind: 'nano_photos_provider2',
+        dataProvider: 'lab-01/vacation/nano_photos_provider2/nano_photos_provider2.php',
+        locationHash: false
+      });
+    });
+  </script>
+  <!-- End of nanoPhotosProvider2 code -->
+
+  <!-- Start of gallery script - images change with caption on click-->
+  <script>
+    $('#gallery img').click(function (evt) {
+      var elem = $(this);
+      var oldImage = $('#photo img');
+      $('#photo').prepend($('<img src=" ' + elem.attr('src') + ' " class="img-fill img-border" >').hide().fadeIn(
+        0));
+      $("#caption").html(elem.attr('alt'));
+      oldImage.fadeOut(0, function () {
+        $(this).remove();
+        $("#caption").html(elem.attr('alt')); // set the caption
+      });
+    });
+
+    $('#gallery img:first').trigger('click');
+  </script>
+
+  <!-- End of gallery script -->
+
+  <!-- END OF JAVA SCRIPT CODE -->
+
+</body>
+
+</html>
