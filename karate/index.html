@@ -182,10 +182,36 @@
     #gallery img {
       opacity: 0.8;
       cursor: pointer;
+      height: auto;
     }
 
     #gallery img:hover {
       opacity: 1
+    }
+
+    #gallery {
+      text-align:center
+    }
+
+    #gallery td {
+      vertical-align: middle; 
+      width: 19%; 
+      max-height: 130px; 
+      padding: 1%;
+    }
+
+    #no-table {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #no-table img {
+      width: 20%; 
+      height: auto; 
+      padding: 1%;
+      float: left;
+      box-sizing: border-box;
     }
 
     /* Use float property to make two-column layout */
@@ -269,31 +295,38 @@
           <div style="text-align:center" id="caption"></div>
         </div>
 
-        <div id="gallery" style="text-align:center">
+        <div id="gallery">
           <table>
             <tr>
-              <td style="vertical-align: middle; width: 19%; max-height: 130px; padding: 1%;"><img
+              <td><img
                   src="photos/KarateClass_Hawaii-circa1994.png"
                   alt="Photo of author with Sensei and fellow students at a Dojo in Hilo, Hawai`i where they trained in one of the main traditional Okinawan styles of karate known as Gōjū-ryū (剛柔流). Two students earned their green belts that day - circa 1994."
                   class="img-tn img-border"></td>
-              <td style="vertical-align: middle; width: 19%; max-height: 130px; padding: 1%;"><img
+              <td><img
                   src="photos/KarateClass_Hawaii-circa1995.png"
                   alt="Photo of author at his Dojo in Hilo, Hawai`i. Here, the students are participating in 'randori' (乱取り) or free-style sparring practice - circa 1995."
                   class="img-tn img-border"></td>
-              <td style="vertical-align: middle; width: 19%; max-height: 130px; padding: 1%;"><img
+              <td><img
                   src="photos/SiriusBontea_Hawaii-circa1996.png"
                   alt="Photo of author in front of his humble abode in Hilo, Hawai`i - circa 1996."
                   class="img-tn img-border"></td>
-              <td style="vertical-align: middle; width: 19%; max-height: 130px; padding: 1%;"><img
+              <td><img
                   src="photos/Sirius_and_Bear_Kansas-circa2021.png"
                   alt="Photo of author and son at their home on Fort Leavenworth, Kansas - circa 2021."
                   class="img-tn img-border"></td>
-              <td style="vertical-align: middle; width: 19%; max-height: 130px; padding: 1%;"><img
+              <td><img
                   src="photos/Sirius_and_BearKick_Kansas-circa2021.png"
                   alt="Photo of author and son in Fort Leavenworth, Kansas. Here, the handsome young man is executing a 'mae geri' or front kick whilst being mindful of keeping his hands up to protect his face - circa 2021."
                   class="img-tn img-border"></td>
             </tr>
           </table>
+        </div>
+        <div id="no-table">
+          <img src="photos/KarateClass_Hawaii-circa1994.png" alt="">
+          <img src="photos/KarateClass_Hawaii-circa1995.png" alt="">
+          <img src="photos/SiriusBontea_Hawaii-circa1996.png" alt="">
+          <img src="photos/Sirius_and_Bear_Kansas-circa2021.png" alt="">
+          <img src="photos/Sirius_and_BearKick_Kansas-circa2021.png" alt="">
         </div>
       </div>
       <table style="background-color:#fff5c6; border: none; font-size: 1.2em;
@@ -444,7 +477,7 @@
         <li>Code from <a href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">Leaflet 1.7.1</a> using the <a
             href="https://www.thunderforest.com/maps/mobile-atlas/">Thunderforest Mobile Atlas</a> base map was used to
           create the interactive webmap.</li>
-        <li>Code from <a href="https://nanogallery2.nanostudio.org/">nanogallery2 3.0.5</a> was used to create the lightbox
+        <li>Code from <a href="https://nanogallery2.nanostudio.org/">nanogallery2 3.0.5</a> was used to create lightbox
           gallery.</li>
         <li>Code from <a href="http://code.jquery.com/">jQuery 3.6.0</a> is front loaded to enable effects in Leaflet
           and nanogallery2 code.</li>
