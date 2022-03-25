@@ -31,8 +31,8 @@
     <h2>natives and visitors</h2>
   </header>
   <div id='map' class="center"></div><br>
-  
-  
+
+
   <section>
 
 
@@ -111,7 +111,7 @@
             <li>Colour scheme for the map legend was chosen with the aid of <a
                 href="https://colorbrewer2.org/#type=sequential&scheme=YlGnBu&n=7">ColorBrewer2.org</a> to ensure
               legibility for individuals with colour blindness.</li>
-            
+
             <li>Data accessed 24 March 2022.</li>
         </div>
       </div>
@@ -182,7 +182,7 @@
 
 
   <script>
-   // Great Horned Owl Range
+    // Great Horned Owl Range
     fetch("data/GreatHornedOwlRange.geojson")
       .then(function (response) {
         console.log(response)
@@ -193,18 +193,17 @@
         }
       })
       .then(function (data) {
-        var data = L.geoJson(data, {
+        var greatHornedOwlData = L.geoJson(data, {
           style: function (feature) {
             return {
               color: '#39352d',
               weight: 0.6,
               opacity: 0.7,
-              fillColor: 'tan',
+              fillColor: 'yellow',
               fillOpacity: 0.5
             }
           },
           onEachFeature: function (feature, layer) {
-            var p = layer.feature.properties
             var popup = `<b>Great Horned Owl Range</b>`
             layer.bindPopup(popup, {
               direction: 'auto',
@@ -221,7 +220,7 @@
             });
           }
         }).addTo(map);
-        drawMap(data)
+        drawMap(greatHornedOwlData)
       })
       .then(function () {
         drawNewLayers()
@@ -230,7 +229,54 @@
         console.log(`Something went wrong: ${error}`);
       });
 
-      // Barn Owl Range
+    // Barred Owl Range
+    fetch("data/BarredOwlRange.geojson")
+      .then(function (response) {
+        console.log(response)
+        if (response.ok) {
+          return response.json()
+        } else {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+      })
+      .then(function (data) {
+        var barredOwlData = L.geoJson(data, {
+          style: function (feature) {
+            return {
+              color: '#39352d',
+              weight: 0.6,
+              opacity: 0.7,
+              fillColor: 'red',
+              fillOpacity: 0.5
+            }
+          },
+          onEachFeature: function (feature, layer) {
+            var popup = `<b>Barred Owl Range</b>`
+            layer.bindPopup(popup, {
+              direction: 'auto',
+              className: 'translucent-popup'
+            });
+            layer.on('mouseover', function (ev) {
+              layer.openPopup(ev.latlng);
+            });
+            layer.on('mousemove', function (ev) {
+              layer.openPopup(ev.latlng);
+            });
+            layer.on('mouseout', function () {
+              layer.closePopup();
+            });
+          }
+        }).addTo(map);
+        drawMap(barredOwlData)
+      })
+      .then(function () {
+        drawNewLayers()
+      })
+      .catch(function (error) {
+        console.log(`Something went wrong: ${error}`);
+      });
+
+    // Barn Owl Range
     fetch("data/BarnOwlRange.geojson")
       .then(function (response) {
         console.log(response)
@@ -241,7 +287,7 @@
         }
       })
       .then(function (data) {
-        var data = L.geoJson(data, {
+        var barnOwlData = L.geoJson(data, {
           style: function (feature) {
             return {
               color: '#39352d',
@@ -269,7 +315,7 @@
             });
           }
         }).addTo(map);
-        drawMap(data)
+        drawMap(barnOwlData)
       })
       .then(function () {
         drawNewLayers()
@@ -278,7 +324,7 @@
         console.log(`Something went wrong: ${error}`);
       });
 
-// Political Boundary Lines
+    // Political Boundary Lines
     fetch("data/boundary_lines.geojson")
       .then(function (response) {
         console.log(response)
@@ -309,7 +355,15 @@
         console.log(`Something went wrong: ${error}`);
       });
 
-     
+    // layer controls check box
+    var sourceLabels = {
+      "<b style='color:yellow'>Great Horned Owl</b>": greatHornedOwlData,
+      "<b style='color:red'>Barred Owl</b>": barredOwlData,
+      "<b style='color:blue'>Barn Owl</b>": barnOwlData,
+    }
+    L.control.layers(null, sourceLabels, {
+      collapsed: false
+    }).addTo(map);
   </script>
 
 </body>
