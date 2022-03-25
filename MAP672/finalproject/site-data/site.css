@@ -76,7 +76,7 @@ ul {
 }
 
 #map {
-  background: rgb(145, 145, 145);
+  background: rgb(49, 49, 49);
   width: 95%;
   height: 60vh;
   margin: none;
@@ -88,7 +88,7 @@ ul {
 
 .legend {
   padding: 6px 8px;
-  background: rgba(209, 208, 208, 0.4);
+  background: rgba(44, 44, 44, 0.4);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   color: rgb(0, 0, 0);

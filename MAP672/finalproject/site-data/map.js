@@ -51,7 +51,7 @@ var UKyIcon = L.icon({
     iconUrl: 'https://siriusbontea.github.io/MAP672/finalproject/site-data/graphics/Kentucky_Wildcats_logo.svg',
     iconSize: [30, 33], // size of the icon
     iconAnchor: [5,10], // point of the icon which will correspond to marker's location
-    popupAnchor: [0, 0] // point from which the popup should open relative to the iconAnchor
-});
+    popupAnchor: [0, 0], // point from which the popup should open relative to the iconAnchor
+ });
 
 L.marker([38.0386253, -84.5042394], {icon: UKyIcon}).addTo(map);
