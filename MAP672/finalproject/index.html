@@ -121,6 +121,7 @@
             <li>Shapefile for the North America Political Boundaries map comes from <a
                 href="https://www.sciencebase.gov/catalog/item/4fb555ebe4b04cb937751db9">USGS ScienceBase-Catalog</a>.
               Shapefile was converted to a GeoJSON in QGIS for use as a webmap.</li>
+              <li>Kentucky boundary was extracted from the US Census Bureau’s <a href="https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html">TIGER/Line Geodatabase.</a></li>
             <li>The map uses the <a href="https://epsg.io/102321">ESRI 102321</a> NAD 1983 High Accuracy Regional
               Network (HARN) State Plane North Dakota (South) FIPS 3302 Lambert Conformal Conic projection and centred
               on <a href="https://en.wikipedia.org/wiki/Center%2C_North_Dakota">Center, North Dakota</a> which
@@ -383,6 +384,39 @@
         console.log(`Something went wrong: ${error}`);
       });
 
+      // Kentucky Boundary Lines
+    fetch("data/Kentucky-boundary.geojson")
+      .then(function (response) {
+        console.log(response)
+        if (response.ok) {
+          return response.json()
+        } else {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+      })
+      .then(function (data) {
+        var data = L.geoJson(data, {
+          style: function (feature) {
+            return {
+              color: '#000000',
+              weight: 1.5,
+              opacity: 1,
+              fillColor: '#000000',
+              fillOpacity: .1,
+              interactive: false
+            }
+          },
+
+        }).addTo(map);
+        drawMap(data)
+      })
+      .then(function () {
+        drawNewLayers()
+      })
+      .catch(function (error) {
+        console.log(`Something went wrong: ${error}`);
+      });
+
     // layer controls check box
     var sourceLabels = {
       "<b style='color:yellow'>Great Horned Owl</b>": greatHornedOwlData,
@@ -392,6 +426,8 @@
     L.control.layers(null, sourceLabels, {
       collapsed: false
     }).addTo(map);
+
+    // Need to add
   </script>
 
 </body>
