@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8 />
+  <title>Mapping Kentucky's Owls</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <link rel='icon' href='https://newmapsplus.github.io/favicon.ico' type='image/x-icon'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css">
+  <!-- Leaflet v1.7.1 style sheet: -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+  <!-- Custom fonts: -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+  <!-- CSS for this page: -->
+  <link href="site-data/site.css" rel="stylesheet">
+  <style>
+    /* CSS overrides go in here */
+  </style>
+</head>
+
+<body>
+
+  <header class="center">
+    <h1>Mapping Kentucky's Owls</h1>
+    <h2>natives and visitors</h2>
+  </header>
+  <div id='map' class="center"></div>
+  
+  
+  <section>
+
+
+
+    <footer>
+      <div class="row">
+        <div class="first-column">
+          <h3>The Eight Owls</h3>
+          <h4>As listed on <a href="https://avibirds.com/owls-of-kentucky/">AviBirds.com</a>:</h4>
+          <ul>
+            <li>Great Horned Owl</li>
+            <li>Barred Owl</li>
+            <li>Barn Owl</li>
+            <li>Eastern Screech Owl</li>
+            <li>Short-Eared Owl</li>
+            <li>Long-Eared Owl</li>
+            <li>Northern Saw-Whet Owl</li>
+            <li>Snowy Owl</li>
+          </ul>
+        </div>
+        <div class="column">
+          <h3>Project Notes:</h3>
+          <ul>
+            <li>This webpage was built to meet requirements for Module 10 (Final Project) of the <a
+                href="https://newmapsplus.github.io/map672/syllabus/">MAP 672: Programming For Web
+                Mapping</a>
+              course at the
+              <a href="https://newmapsplus.as.uky.edu/">University of Kentucky</a>.
+            </li>
+          </ul>
+          <h3>Tools, citations, and methodology used in this project:</h3>
+          <ul>
+
+            <li>All software tools used in this project were ran on the <a
+                href="https://freebsdfoundation.org/freebsd-project/what-is-freebsd/">FreeBSD
+                13-RELEASE-p7</a>
+              Operating
+              System.
+            </li>
+
+            <li><a href="https://www.qgis.org/en/site/forusers/alldownloads.html#freebsd">QGIS 3.24.1-Tisler</a> was
+              used
+              to inspect data, crop eBird.org data, and perform format conversions of Shapefiles to GeoJSON.</li>
+
+            <li><a href="https://github.com/microsoft/vscodeVisual">Visual Studio Code - Open Source ("Code
+                - OSS")
+                1.64.2</a> was used for all coding with the following plugins installed: <a
+                href="https://beautifier.io/">Beautify</a>, <a
+                href="https://github.com/formulahendry/vscode-code-runner">Code
+                Runner</a>, and <a href="https://github.com/ritwickdey/vscode-live-server">Live
+                Server</a>.
+            <li>Code from <a href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">Leaflet 1.7.1</a> used to create
+              the interactive webmap.</li>
+            <li>Owl range and predicted range data comes from <a
+                href="https://ebird.org/science/status-and-trends/download-data">eBird.org</a> in collaboration with <a
+                href="https://www.birds.cornell.edu/home/">the Cornell Lab of Ornithology</a> at Cornell University.
+            </li>
+            <li>eBird's data comes as Shapefiles of varying levels of resolutions depending on resesearch requirements.
+              Due to the size of some of the data files, the data was run through <a
+                href="https://mapshaper.org/">MapShaper</a> to simplify and reduce the size of the data files.</li>
+            <li>Shapefile for the North America Political Boundaries map comes from <a
+                href="https://www.sciencebase.gov/catalog/item/4fb555ebe4b04cb937751db9">USGS ScienceBase-Catalog</a>.
+              Shapefile was converted to a GeoJSON in QGIS for use as a webmap.</li>
+            <li>The map uses the <a href="https://epsg.io/102321">ESRI 102321</a> NAD 1983 High Accuracy Regional
+              Network (HARN) State Plane North Dakota (South) FIPS 3302 Lambert Conformal Conic projection and centred
+              on <a href="https://en.wikipedia.org/wiki/Center%2C_North_Dakota">Center, North Dakota</a> which
+              coincidently happens to be the geographical centre of North America!</li>
+            <!-- <li>Code from <a href="http://code.jquery.com/">jQuery 3.6.0</a> is front loaded to enable
+            effects in
+            Leaflet.
+          </li> -->
+            <li>Code from <a href="https://cdnjs.com/libraries/proj4js/2.8.0/">Proj4js v2.8.0</a> is used to change
+              default map projection from WGS84 to EPSG 102008.</li>
+            <li>Code from <a href="https://cdnjs.com/libraries/proj4leaflet/">Proj4Leaflet v1.0.2</a> is used to enable
+              Proj4js in Leaflet.</li>
+            <li>Colour scheme for the map legend was chosen with the aid of <a
+                href="https://colorbrewer2.org/#type=sequential&scheme=YlGnBu&n=7">ColorBrewer2.org</a> to ensure
+              legibility for individuals with colour blindness.</li>
+            <li>Image of Bob Ross was pulled from <a href="  https://en.wikipedia.org/wiki/Bob_Ross">Wikipedia.org</a>
+              and edited with the <a href="https://www.gimp.org/">GIMP v2.10.30</a> and is used under the Fair Use
+              clause.
+            </li>
+
+
+            <li>Data accessed 24 March 2022.</li>
+        </div>
+      </div>
+  </section>
+  <footer>
+
+    <hr>
+
+    <h4 class="center">About the author:</h4>
+    <img id="avatar" class="center" src="site-data/graphics/profile_pic_bw.png">
+    <p id="bio">
+      An artist, scientist, bibliophile, and autodidact at heart, Sirius enjoys applying these
+      facets in his role of dad and husband first and foremost. He also finds happiness with
+      spending time with <a>Shin'yū the Maltipoo<span><img src="site-data/graphics/shin-yu.jpg"
+            alt="Fluffy Little Dog"></span></a>
+      (Shin'yū or 親友 is the Japanese term for "best friend"). Sirius also enjoys calligraphy,
+      metacognition, philosophy, and the pursuit of arcane knowledge regardless of the path it
+      puts him on. He generally prefers Open Source Software solutions such as FreeBSD for daily
+      computing, QGIS for cartography and geospatial analysis, GIMP and Inkscape for image
+      manipulation. However, he is no stranger to proprietary solutions such as ArcGIS Pro, Adobe
+      Photoshop and Illustrator.
+    </p>
+    <p id="linkedin"><i>Connect with <a href="https://www.linkedin.com/in/siriusbontea/">@SiriusBontea</a>
+        on LinkedIn:</i>
+      <br>
+    </p>
+    <p><a href="https://www.linkedin.com/in/siriusbontea/"><img
+          src="site-data/graphics/SiriusBonteaLinkedInQRcode150px.png" alt="Sirius T. Bontea @ LinkedIn" id="linkedin"
+          class="center"></a>
+    </p>
+    </div>
+
+    <hr>
+    <section class="center">
+      <a href="https://newmapsplus.github.io">
+        <img src="https://newmapsplus.github.io/assets/graphics/logo-2018-nmp-75px-h-gray.png"
+          alt="University of Kentucky Geography" class="image-glow">
+      </a>
+
+      <a href="https://uky-gis.github.io">
+        <img src="https://newmapsplus.github.io/assets/graphics/logo-2018-geography-75px-h.png" class="image-glow"
+          alt="University of Kentucky Geography">
+      </a>
+    </section>
+  </footer>
+  <!-- Load scripts using Subresource Integrity (SRI) is a security feature 
+      that enables browsers to verify that resources they fetch (from a CDN) 
+      are delivered without unexpected manipulation. -->
+  <!-- Leaflet v1.7.1 script from https://leafletjs.com/ - Make sure this is placed this AFTER Leaflet's CSS -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+  <!-- jQuery v3.6.0 script from https://jquery.com/ -->
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
+  <!-- Simple Statistics v7.7.5 script from https://simplestatistics.org/ -->
+  <script src="https://unpkg.com/simple-statistics@7.7.5/dist/simple-statistics.min.js"></script>
+  <!-- Proj4js v2.8.0 script from https://cdnjs.com/libraries/proj4js/2.8.0 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.8.0/proj4.js"
+    integrity="sha512-ha3Is9IgbEyIInSb+4S6IlEwpimz00N5J/dVLQFKhePkZ/HywIbxLeEu5w+hRjVBpbujTogNyT311tluwemy9w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Proj4Leaflet v1.0.2 script from https://cdnjs.com/libraries/proj4leaflet -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4leaflet/1.0.2/proj4leaflet.min.js"
+    integrity="sha512-GsAYl1wxzWW6azVpXkhyYfjMb2LbaOnlrqWMBdAk9xDcilinFvGMN+48Ajp/10u/9lcnh8YyS2CYNgung7ewHg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Initial setup of basemap -->
+  <script src="site-data/map.js"></script>
+
+
+  <script>
+   // Great Horned Owl Range
+    fetch("data/GreatHornedOwlRange.geojson")
+      .then(function (response) {
+        console.log(response)
+        if (response.ok) {
+          return response.json()
+        } else {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+      })
+      .then(function (data) {
+        var data = L.geoJson(data, {
+          style: function (feature) {
+            return {
+              color: '#39352d',
+              weight: 0.6,
+              opacity: 0.7,
+              fillColor: 'tan',
+              fillOpacity: 0.5
+            }
+          },
+          onEachFeature: function (feature, layer) {
+            var p = layer.feature.properties
+            var popup = `<b>Great Horned Owl Range</b>`
+            layer.bindPopup(popup, {
+              direction: 'auto',
+              className: 'translucent-popup'
+            });
+            layer.on('mouseover', function (ev) {
+              layer.openPopup(ev.latlng);
+            });
+            layer.on('mousemove', function (ev) {
+              layer.openPopup(ev.latlng);
+            });
+            layer.on('mouseout', function () {
+              layer.closePopup();
+            });
+          }
+        }).addTo(map);
+        drawMap(data)
+      })
+      .then(function () {
+        drawNewLayers()
+      })
+      .catch(function (error) {
+        console.log(`Something went wrong: ${error}`);
+      });
+
+      // Barn Owl Range
+    fetch("data/BarnOwlRange.geojson")
+      .then(function (response) {
+        console.log(response)
+        if (response.ok) {
+          return response.json()
+        } else {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+      })
+      .then(function (data) {
+        var data = L.geoJson(data, {
+          style: function (feature) {
+            return {
+              color: '#39352d',
+              weight: 0.6,
+              opacity: 0.7,
+              fillColor: 'blue',
+              fillOpacity: 0.5
+            }
+          },
+          onEachFeature: function (feature, layer) {
+            var p = layer.feature.properties
+            var popup = `<b>Barn Owl Range</b>`
+            layer.bindPopup(popup, {
+              direction: 'auto',
+              className: 'translucent-popup'
+            });
+            layer.on('mouseover', function (ev) {
+              layer.openPopup(ev.latlng);
+            });
+            layer.on('mousemove', function (ev) {
+              layer.openPopup(ev.latlng);
+            });
+            layer.on('mouseout', function () {
+              layer.closePopup();
+            });
+          }
+        }).addTo(map);
+        drawMap(data)
+      })
+      .then(function () {
+        drawNewLayers()
+      })
+      .catch(function (error) {
+        console.log(`Something went wrong: ${error}`);
+      });
+
+// Political Boundary Lines
+    fetch("data/boundary_lines.geojson")
+      .then(function (response) {
+        console.log(response)
+        if (response.ok) {
+          return response.json()
+        } else {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+      })
+      .then(function (data) {
+        var data = L.geoJson(data, {
+          style: function (feature) {
+            return {
+              color: '#000000',
+              weight: .3,
+              opacity: 1,
+              interactive: false
+            }
+          },
+
+        }).addTo(map);
+        drawMap(data)
+      })
+      .then(function () {
+        drawNewLayers()
+      })
+      .catch(function (error) {
+        console.log(`Something went wrong: ${error}`);
+      });
+
+     
+  </script>
+
+</body>
+
+</html>
