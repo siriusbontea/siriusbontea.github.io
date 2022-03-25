@@ -29,7 +29,7 @@ h2 {
   color: #ffcd2a;
   font-family: 'Grand Hotel', cursive;
   font-style: italic;
-  font-size: 2em;
+  font-size: 2.5em;
   filter: drop-shadow(0rem 0rem .2rem #c0c0c0);
 }
 
@@ -261,6 +261,12 @@ hr {
   font-size: 0.8em;
   font-weight: 300;
   line-height: 1.3em;
+}
+
+.max-image-width {
+  width: 100%;
+  border-radius: 2%;
+  filter: drop-shadow(0rem 0rem .2rem #8b8b8b);
 }
 
 /* Use float property to make two-column layout */
