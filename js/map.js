@@ -62,7 +62,7 @@ This one parses out the different options so that it's easier to make edits to a
      properties: {
        description: 'School of Advanced Military Studies',
        coordinates: [39.348127, -94.91595],
-       url: ['https://en.wikipedia.org/wiki/School_of_Advanced_Military_Studies', 'https://usacac.army.mil/organizations/cace/cgsc/sams'],
+       url: 'https://en.wikipedia.org/wiki/School_of_Advanced_Military_Studies',
        icon: 'images/SAMS-crest.png'
      }
    },
@@ -71,7 +71,7 @@ This one parses out the different options so that it's easier to make edits to a
      properties: {
        description: "Command and General Staff College (CGSC)",
        coordinates: [39.34427, -94.91590],
-       url: ['https://en.wikipedia.org/wiki/United_States_Army_Command_and_General_Staff_College', 'https://usacac.army.mil/organizations/cace/cgsc/cgss'],
+       url: 'https://en.wikipedia.org/wiki/United_States_Army_Command_and_General_Staff_College',
        icon: 'images/Fort_Leavenworth_Crest.png'
      }
    },
@@ -80,7 +80,7 @@ This one parses out the different options so that it's easier to make edits to a
      properties: {
        description: "Ike Skelton Combined Arms Research Library (CARL)",
        coordinates: [39.34638, -94.915992],
-       url: ['https://en.wikipedia.org/wiki/Combined_Arms_Research_Library', 'https://usacac.army.mil/organizations/cace/carl'],
+       url: 'https://en.wikipedia.org/wiki/Combined_Arms_Research_Library',
        icon: 'images/books.png'
      }
    }
