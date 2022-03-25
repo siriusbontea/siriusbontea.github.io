@@ -1,4 +1,4 @@
-{
+var shortEaredOwlData = {
 "type": "FeatureCollection",
 "name": "ShortEaredOwlRange",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },

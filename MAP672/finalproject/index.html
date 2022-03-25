@@ -21,6 +21,12 @@
   <link href="site-data/site.css" rel="stylesheet">
   <style>
     /* CSS overrides go in here */
+    /* CSS overrides go in here */
+    .leaflet-control-layers {
+      width: 140px;
+      background: rgb(34, 34, 34);
+      opacity: .8;
+    }
   </style>
 </head>
 
@@ -121,7 +127,9 @@
             <li>Shapefile for the North America Political Boundaries map comes from <a
                 href="https://www.sciencebase.gov/catalog/item/4fb555ebe4b04cb937751db9">USGS ScienceBase-Catalog</a>.
               Shapefile was converted to a GeoJSON in QGIS for use as a webmap.</li>
-              <li>Kentucky boundary was extracted from the US Census Bureau’s <a href="https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html">TIGER/Line Geodatabase.</a></li>
+            <li>Kentucky boundary was extracted from the US Census Bureau’s <a
+                href="https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html">TIGER/Line
+                Geodatabase.</a></li>
             <li>The map uses the <a href="https://epsg.io/102321">ESRI 102321</a> NAD 1983 High Accuracy Regional
               Network (HARN) State Plane North Dakota (South) FIPS 3302 Lambert Conformal Conic projection and centred
               on <a href="https://en.wikipedia.org/wiki/Center%2C_North_Dakota">Center, North Dakota</a> which
@@ -208,226 +216,202 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!-- Initial setup of basemap -->
   <script src="site-data/map.js"></script>
-
-
+  <!-- Bird Data Files -->
+  <script src="data/GreatHornedOwlRange.js"></script>
   <script>
-    // Great Horned Owl Range
-    fetch("data/GreatHornedOwlRange.geojson")
-      .then(function (response) {
-        console.log(response)
-        if (response.ok) {
-          return response.json()
-        } else {
-          throw new Error(`HTTP error! status: ${response.status}`);
+    // 🦉 Great Horned Owl layer
+    var greatHornedOwlRange = L.geoJson(greatHornedOwlData, {
+      style: function (feature) {
+        return {
+          color: '#1f78b4',
+          fillColor: '#1f78b4',
+          weight: .5,
+          fillOpacity: .5,
         }
-      })
-      .then(function (data) {
-        var greatHornedOwlData = L.geoJson(data, {
-          style: function (feature) {
-            return {
-              color: '#39352d',
-              weight: 0.6,
-              opacity: 0.7,
-              fillColor: 'yellow',
-              fillOpacity: 0.5
-            }
-          },
-          onEachFeature: function (feature, layer) {
-            var popup = `<b>Great Horned Owl Range</b>`
-            layer.bindPopup(popup, {
-              direction: 'auto',
-              className: 'translucent-popup'
-            });
-            layer.on('mouseover', function (ev) {
-              layer.openPopup(ev.latlng);
-            });
-            layer.on('mousemove', function (ev) {
-              layer.openPopup(ev.latlng);
-            });
-            layer.on('mouseout', function () {
-              layer.closePopup();
-            });
-          }
-        }).addTo(map);
-        drawMap(greatHornedOwlData)
-      })
-      .then(function () {
-        drawNewLayers()
-      })
-      .catch(function (error) {
-        console.log(`Something went wrong: ${error}`);
-      });
+      },
+      onEachFeature: function (feature, layer) {
+        var popup = `<b>Great Horned Owl Range</b>`
+        layer.bindPopup(popup, {
+          direction: 'auto',
+          className: 'translucent-popup'
+        });
+        layer.on('mouseover', function (ev) {
+          layer.openPopup(ev.latlng);
+        });
+        layer.on('mousemove', function (ev) {
+          layer.openPopup(ev.latlng);
+        });
+        layer.on('mouseout', function () {
+          layer.closePopup();
+        });
+      }
+    }).addTo(map);
 
-    // Barred Owl Range
-    fetch("data/BarredOwlRange.geojson")
-      .then(function (response) {
-        console.log(response)
-        if (response.ok) {
-          return response.json()
-        } else {
-          throw new Error(`HTTP error! status: ${response.status}`);
+    // to get mouseover/mouseout effects on Great Horned Owl layer
+    greatHornedOwlRange.eachLayer(function (layer) {
+      layer.on('mouseover', function (e) {
+        e.target.setStyle({
+          color: "yellow",
+          weight: 3,
+          opacity: .5,
+          fillOpacity: .7,
+        })
+        this.openTooltip()
+      })
+      layer.on('mouseout', function (e) {
+        greatHornedOwlRange.resetStyle(layer)
+        this.closeTooltip()
+      })
+    })
+
+    // 🦉 Barred Owl layer
+    var barredOwlRange = L.geoJson(barredOwlData, {
+      style: function (feature) {
+        return {
+          color: '#33a02c',
+          fillColor: '#33a02c',
+          weight: .5,
+          fillOpacity: .5,
         }
-      })
-      .then(function (data) {
-        var barredOwlData = L.geoJson(data, {
-          style: function (feature) {
-            return {
-              color: '#39352d',
-              weight: 0.6,
-              opacity: 0.7,
-              fillColor: 'red',
-              fillOpacity: 0.5
-            }
-          },
-          onEachFeature: function (feature, layer) {
-            var popup = `<b>Barred Owl Range</b>`
-            layer.bindPopup(popup, {
-              direction: 'auto',
-              className: 'translucent-popup'
-            });
-            layer.on('mouseover', function (ev) {
-              layer.openPopup(ev.latlng);
-            });
-            layer.on('mousemove', function (ev) {
-              layer.openPopup(ev.latlng);
-            });
-            layer.on('mouseout', function () {
-              layer.closePopup();
-            });
-          }
-        }).addTo(map);
-        drawMap(barredOwlData)
-      })
-      .then(function () {
-        drawNewLayers()
-      })
-      .catch(function (error) {
-        console.log(`Something went wrong: ${error}`);
-      });
+      },
+      onEachFeature: function (feature, layer) {
+        var popup = `<b>Great Horned Owl Range</b>`
+        layer.bindPopup(popup, {
+          direction: 'auto',
+          className: 'translucent-popup'
+        });
+        layer.on('mouseover', function (ev) {
+          layer.openPopup(ev.latlng);
+        });
+        layer.on('mousemove', function (ev) {
+          layer.openPopup(ev.latlng);
+        });
+        layer.on('mouseout', function () {
+          layer.closePopup();
+        });
+      }
+    }).addTo(map);
 
-    // Barn Owl Range
-    fetch("data/BarnOwlRange.geojson")
-      .then(function (response) {
-        console.log(response)
-        if (response.ok) {
-          return response.json()
-        } else {
-          throw new Error(`HTTP error! status: ${response.status}`);
+    // to get mouseover/mouseout effects on Great Horned Owl layer
+    barredOwlRange.eachLayer(function (layer) {
+      layer.on('mouseover', function (e) {
+        e.target.setStyle({
+          color: "yellow",
+          weight: 3,
+          opacity: .5,
+          fillOpacity: .7,
+        })
+        this.openTooltip()
+      })
+      layer.on('mouseout', function (e) {
+        barredOwlRange.resetStyle(layer)
+        this.closeTooltip()
+      })
+    })
+
+// 🦉 Barn Owl layer
+var barnOwlRange = L.geoJson(barnOwlData, {
+      style: function (feature) {
+        return {
+          color: '#33a02c',
+          fillColor: '#33a02c',
+          weight: .5,
+          fillOpacity: .5,
         }
-      })
-      .then(function (data) {
-        var barnOwlData = L.geoJson(data, {
-          style: function (feature) {
-            return {
-              color: '#39352d',
-              weight: 0.6,
-              opacity: 0.7,
-              fillColor: 'blue',
-              fillOpacity: 0.5
-            }
-          },
-          onEachFeature: function (feature, layer) {
-            var p = layer.feature.properties
-            var popup = `<b>Barn Owl Range</b>`
-            layer.bindPopup(popup, {
-              direction: 'auto',
-              className: 'translucent-popup'
-            });
-            layer.on('mouseover', function (ev) {
-              layer.openPopup(ev.latlng);
-            });
-            layer.on('mousemove', function (ev) {
-              layer.openPopup(ev.latlng);
-            });
-            layer.on('mouseout', function () {
-              layer.closePopup();
-            });
-          }
-        }).addTo(map);
-        drawMap(barnOwlData)
-      })
-      .then(function () {
-        drawNewLayers()
-      })
-      .catch(function (error) {
-        console.log(`Something went wrong: ${error}`);
-      });
+      },
+      onEachFeature: function (feature, layer) {
+        var popup = `<b>Great Horned Owl Range</b>`
+        layer.bindPopup(popup, {
+          direction: 'auto',
+          className: 'translucent-popup'
+        });
+        layer.on('mouseover', function (ev) {
+          layer.openPopup(ev.latlng);
+        });
+        layer.on('mousemove', function (ev) {
+          layer.openPopup(ev.latlng);
+        });
+        layer.on('mouseout', function () {
+          layer.closePopup();
+        });
+      }
+    }).addTo(map);
 
-    // Political Boundary Lines
-    fetch("data/boundary_lines.geojson")
-      .then(function (response) {
-        console.log(response)
-        if (response.ok) {
-          return response.json()
-        } else {
-          throw new Error(`HTTP error! status: ${response.status}`);
+    // to get mouseover/mouseout effects on Great Horned Owl layer
+    barnOwlRange.eachLayer(function (layer) {
+      layer.on('mouseover', function (e) {
+        e.target.setStyle({
+          color: "yellow",
+          weight: 3,
+          opacity: .5,
+          fillOpacity: .7,
+        })
+        this.openTooltip()
+      })
+      layer.on('mouseout', function (e) {
+        barnOwlRange.resetStyle(layer)
+        this.closeTooltip()
+      })
+    })
+   
+// 🦉 Barn Owl layer
+var barnOwlRange = L.geoJson(barnOwlData, {
+      style: function (feature) {
+        return {
+          color: '#33a02c',
+          fillColor: '#33a02c',
+          weight: .5,
+          fillOpacity: .5,
         }
-      })
-      .then(function (data) {
-        var data = L.geoJson(data, {
-          style: function (feature) {
-            return {
-              color: '#000000',
-              weight: .3,
-              opacity: 1,
-              interactive: false
-            }
-          },
+      },
+      onEachFeature: function (feature, layer) {
+        var popup = `<b>Great Horned Owl Range</b>`
+        layer.bindPopup(popup, {
+          direction: 'auto',
+          className: 'translucent-popup'
+        });
+        layer.on('mouseover', function (ev) {
+          layer.openPopup(ev.latlng);
+        });
+        layer.on('mousemove', function (ev) {
+          layer.openPopup(ev.latlng);
+        });
+        layer.on('mouseout', function () {
+          layer.closePopup();
+        });
+      }
+    }).addTo(map);
 
-        }).addTo(map);
-        drawMap(data)
+    // to get mouseover/mouseout effects on Great Horned Owl layer
+    barnOwlRange.eachLayer(function (layer) {
+      layer.on('mouseover', function (e) {
+        e.target.setStyle({
+          color: "yellow",
+          weight: 3,
+          opacity: .5,
+          fillOpacity: .7,
+        })
+        this.openTooltip()
       })
-      .then(function () {
-        drawNewLayers()
+      layer.on('mouseout', function (e) {
+        barnOwlRange.resetStyle(layer)
+        this.closeTooltip()
       })
-      .catch(function (error) {
-        console.log(`Something went wrong: ${error}`);
-      });
+    })
 
-      // Kentucky Boundary Lines
-    fetch("data/Kentucky-boundary.geojson")
-      .then(function (response) {
-        console.log(response)
-        if (response.ok) {
-          return response.json()
-        } else {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-      })
-      .then(function (data) {
-        var data = L.geoJson(data, {
-          style: function (feature) {
-            return {
-              color:'blue',
-              weight: 1.5,
-              opacity: 1,
-              fillColor: '#000000',
-              fillOpacity: .2,
-              interactive: false
-            }
-          },
-
-        }).addTo(map);
-        drawMap(data)
-      })
-      .then(function () {
-        drawNewLayers()
-      })
-      .catch(function (error) {
-        console.log(`Something went wrong: ${error}`);
-      });
-
-    // layer controls check box
-    var sourceLabels = {
-      "<b style='color:yellow'>Great Horned Owl</b>": greatHornedOwlData,
-      "<b style='color:red'>Barred Owl</b>": barredOwlData,
-      "<b style='color:blue'>Barn Owl</b>": barnOwlData,
+   // layer controls check box
+   var sourceLabels = {
+      "<b style='color:#1f78b4'>Great Horned Owl</b>": greatHornedOwlRange,
+      "<b style='color:#33a02c'>Barred Owl</b>": barredOwlRange,
+      "<b style='color:#e31a1c'>Barn Owl</b>": barnOwlRange,
     }
     L.control.layers(null, sourceLabels, {
       collapsed: false
     }).addTo(map);
 
-    // Need to add
+
+ 
+
   </script>
 
 </body>
