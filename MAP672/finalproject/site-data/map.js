@@ -30,17 +30,18 @@ PROJCS["NAD_1983_HARN_StatePlane_North_Dakota_South_FIPS_3302",
 
  var options = {
      crs: crs,
-     center: [38.0386253, -84.5042394], // University of Kentucky - Department of Geography, Lexington, Kentucky
+    //  center: [38.0386253, -84.5042394], // University of Kentucky - Department of Geography, Lexington, Kentucky
     //  center: [36.6963788, -84.5468082], // Bob Ross Rd, Stearns, Kentucky
     //  center: [29.0274313, -80.8953009], // Bob Ross Art Workshop, New Smyrna Beach, Florida
     //  center: [39.9989898, -102.0508567], // CO KS NE Triple Point
-    //  center: [47.1152105,-101.3031364], // Center, North Dakota - The Geographical Centre of North America!
-     zoom: 2,
+     center: [47.1152105,-101.3031364], // Center, North Dakota - The Geographical Centre of North America!
+     zoom: 1,
      zoomSnap: .5,
      zoomDelta: 0.2,
      zoomControl: false
  }
  var map = L.map('map', options);
+ map.attributionControl.setPrefix('');
 
 //  L.control.zoom({
 //      position: 'bottomright'

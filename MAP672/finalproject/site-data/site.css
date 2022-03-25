@@ -30,7 +30,20 @@ h2 {
   font-family: 'Grand Hotel', cursive;
   font-style: italic;
   font-size: 2em;
-  filter: drop-shadow(0rem 0rem .2rem #8b8b8b);
+  filter: drop-shadow(0rem 0rem .2rem #c0c0c0);
+}
+
+h3 {
+  display: inline-block;
+  margin: auto;
+  font-weight: 700;
+}
+
+h4 {
+  display: inline-block;
+  margin: auto;
+  font-style: italic;
+  font-weight: 500;
 }
 
 p {
