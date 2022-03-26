@@ -22,10 +22,11 @@
   <style>
     /* CSS overrides go in here */
     .leaflet-control-layers {
-      width: 175px;
+      width: 170px;
       background: rgb(0, 0, 0);
       opacity: .8;
       text-align: left;
+      border-radius: 9%;
     }
   </style>
 </head>
@@ -37,14 +38,9 @@
     <h2>natives and visitors</h2>
   </header>
   <div id='map' class="center"></div><br>
-  <div class="center-linkbox">Clicking on the map
-    will overlay a range ring that's
-    graduated at 250km radius intervals from the centre point.</div>
-
+  <div class="center-linkbox">Clicking on the map will overlay a range ring that's graduated at 250 km radius intervals
+    out to 1,000 km from the centre point.</div>
   <section>
-
-
-
     <footer>
       <div class="row">
         <div class="first-column">
@@ -87,6 +83,46 @@
           </div>
         </div>
         <div class="column">
+          <h3>Going Beyond Kentucky's Owls:</h3>
+          <p>We continue our study of owls with this final project for the <a
+              href="https://newmapsplus.github.io/map672/syllabus/">MAP 672: Programming For Web
+              Mapping</a>
+            course at the
+            <a href="https://newmapsplus.as.uky.edu/">University of Kentucky</a>. Previously, I mapped Snowy Owls to meet
+              the <a href="https://siriusbontea.github.io/snowy-owls/index.html">final project requirements for
+                MAP671</a>, and I discovered that these animals are capable of flying as far as Hawai`i in search of
+              food. Eight species of owls can be observed in the great state of Kentucky, with Snowy Owls, though rare
+              visitors to the commonwealth, making their appearance from time to time.</p>
+          <p>Together with Snowy Owls, Short-Eared and Northern Saw-Whet Owls visit Kentucky from their home ranges.
+            Snowy Owls aren't technically migratory, but the other two are winter migrants. The remaining five owl
+            species, the Great Horned Owls, Barred Owls Owls, Barn Owls, Eastern Screech Owls, and Long-Eared Owls, are
+            all natives to Kentucky.</p>
+          <p>Though these birds are not currently endangered, their numbers are declining due to habitat destruction and
+            the <a href="electricalpower/index.html">not-so-green "green energy" practices</a> of solar farms, biomass
+            powerplants, and wind farms. Environmental pollution also threatens the future of owls. Furthermore, the
+            quest for clean air, which is inherently a noble cause, has a dark side. Electric Vehicles use batteries
+            that require various rare earth minerals to function. Growing demand for these minerals requires a
+            tremendous increase in mining operations that threatens the environment and the interconnected ecosystems
+            from pollution and the destruction of habitats. For example, <a
+              href="https://therevelator.org/ev-batteries-seabed-mining/">mining the seabed for raw materials</a> has
+            the potential to cause devastating effects on the food chain, which can endanger all life, not just our
+            feathered friends.</p>
+          <p>Studying the splendour of the natural world and advocating for conservation is rewarding. It brings
+            much-needed awareness to the inner workings of various policy efforts, which sound good on the surface.
+            Advances in electric vehicles wouldn't be where they are today if not the result of strip mining Mother
+            Earth for her natural resources. To meet the demand for more batteries, <a
+              href="https://usa.streetsblog.org/2021/02/09/lithium-mining-and-the-hidden-environmental-costs-of-evs/">lithium
+              mining alone requires moving more tons of earth (resulting in environmental destruction) than mining
+              coal</a>. Still, as we dig deeper (no pun intended), we learn that the green movement isn't as green as
+            the intertwined corporate and government sponsors will have us believe. When <a
+              href="https://www.americaspower.org/its-time-to-end-subsidies-for-renewable-energy/">hundreds of billions
+              of dollars are tied up in government subsidies</a>, you can rest assured that truth in advertising is one
+            of the first casualties.</p>
+          <p>Owls are but a small part of the natural world, and Kentucky is a small corner of our natural world. This
+            simple mapping project highlights that both elements are interconnected with other ecosystems and physical
+            geographies. We need to better safeguard the environment for ourselves and future generations by holding the
+            cabal of government, corporate, and media interests accountable every time they lie to us about protecting
+            our environment. We only have one chance to get it right, and we should feel compelled to take action.</p>
           <h3>Project Notes:</h3>
           <ul>
             <li>This webpage was built to meet requirements for Module 10 (Final Project) of the <a
@@ -151,7 +187,7 @@
               were used as much as possible and are for illustrative and educational purposes with attribution to the
               original sources as applicable.</li>
 
-            <li>Data accessed 24 March 2022.</li>
+            <li>Data accessed 25 March 2022.</li>
         </div>
       </div>
   </section>
@@ -469,7 +505,7 @@
       .addTo(map);
 
     // Adding to range circle to the map on mouse click
-    var radiusCentre = L.circle([0, 0], 5, {
+    var radiusCentre = L.circle([0, 0], 5, { // centre red dot
       fillOpacity: .1,
       fillColor: 'red',
       color: 'red',
@@ -477,7 +513,7 @@
       stroke: true,
       weight: 2,
       interactive: false, // This allows users to click through the circle
-      autoZIndex: true,
+      autoZIndex: true, // This places the marker above other layers
     })
     var radiusCircle250 = L.circle([0, 0], 250000, { // 250km
       fillColor: 'white',
@@ -486,7 +522,7 @@
       opacity: .7,
       stroke: true,
       weight: .2,
-      interactive: false // This allows users to click through the circle
+      interactive: false
     })
     var radiusCircle = L.circle([0, 0], 500000, { // 500km
       fillColor: 'white',
@@ -495,7 +531,7 @@
       opacity: .7,
       stroke: true,
       weight: .2,
-      interactive: false // This allows users to click through the circle
+      interactive: false
     })
     var radiusCircle750 = L.circle([0, 0], 750000, { // 750km
       fillColor: 'white',
@@ -504,7 +540,7 @@
       opacity: .7,
       stroke: true,
       weight: .2,
-      interactive: false // This allows users to click through the circle
+      interactive: false
     })
     var radiusBigCircle = L.circle([0, 0], 1000000, { // 1000km
       fillColor: 'white',
@@ -528,20 +564,6 @@
       radiusBigCircle.setLatLng(e.latlng)
         .addTo(map);
     });
-
-
-    // // Political Boundary Lines
-    // var boundary = L.geoJson(boundaryLines, {
-    //   style: function (feature) {
-    //     return {
-    //       color: '#white',
-    //       fillColor: '#fccde5',
-    //       weight: 0.5,
-    //       fillOpacity: .6,
-    //       interactive: false
-    //     }
-    //   },
-    // }).addTo(map);
 
     // Political Boundary Lines
     fetch("data/boundary_lines.geojson")

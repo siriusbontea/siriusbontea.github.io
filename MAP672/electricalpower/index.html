@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset=utf-8 />
+	<title>Electrical Power in the United States</title>
+	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+	<link rel='icon' href='https://newmapsplus.github.io/favicon.ico' type='image/x-icon' />
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+	<link href="https://fonts.googleapis.com/css?family=Teko:300,300i,400,900i|Montserrat:300,300i" rel="stylesheet">
+
+	<style>
+		/* 
+			UKy Colors: 
+            #c7c9c8 light gray 
+            #63666a dark gray
+            #15397f dark blue
+            #009bda light blue
+            #0033a0 official blue
+        */
+		body {
+			margin: 0;
+			padding: 0;
+			background: #ac9768;
+			font-family: 'Montserrat', sans-serif;
+			font-weight: 300;
+			color: #000000;
+			font-size: 100%;
+			/* 16px is default browser size */
+
+		}
+
+		header,
+		section,
+		footer {
+			width: 80%;
+			margin: 10px auto;
+		}
+
+		h1 {
+			font-family: 'Teko';
+			font-weight: 900;
+			font-size: 2.8em;
+			letter-spacing: .05em;
+			margin-bottom: -20px;
+			color: #3137FD;
+			text-shadow: 2px 2px 4px#7DF9FF;
+		}
+
+		h2 {
+			font-family: 'Montserrat';
+			font-style: italic;
+			font-weight: 700;
+			color: #000000;
+			font-size: 1.3em;
+		}
+
+		h3 {
+			font-family: 'Montserrat';
+			font-weight: 700;
+			color: #000000;
+			font-size: 1.3em;
+		}
+
+		.bold-popup {
+			font-family: 'Teko';
+			font-weight: 900;
+			font-size: 1.7em;
+		}
+
+		p {
+			font-size: 1em;
+			line-height: 1.8em;
+			/* margin-bottom: 5px; */
+		}
+
+		a {
+			color: #035096;
+			font-weight: 400;
+			text-decoration: none;
+		}
+
+		a:hover {
+			color: #2C75FF;
+			text-shadow: 2px 2px 4px#7DF9FF;
+			text-decoration: underline;
+			filter: drop-shadow(0.35rem 0.35rem 0.4rem #353535)
+		}
+
+		#bio {
+			margin-left: 5%;
+			margin-right: 5%;
+			text-align: justify;
+			align-items: center;
+			align-content: center;
+			line-height: 1.1em;
+		}
+
+		#bio img {
+			display: none;
+		}
+
+		#bio a:hover img {
+			display: block;
+			position: fixed;
+			bottom: 40%;
+			left: 20%;
+			width: 200px;
+			height: 200px;
+			z-index: 800;
+			border-radius: 100%;
+		}
+
+		ul {
+			padding: 0px 20px 4px 20px;
+			font-size: 1em;
+			line-height: 1.2em;
+			color: #000000;
+		}
+
+		li {
+			margin: 10px 0
+		}
+
+		hr {
+			margin: 20px 0;
+			border: 0;
+			height: 1px;
+			background: #63666a;
+
+		}
+
+		#avatar {
+			border-radius: 7%;
+			font-size: .8em;
+			filter: drop-shadow(0.35rem 0.35rem 0.4rem #353535)
+		}
+
+		#linkedin {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			border-radius: 4%;
+			width: auto;
+			font-size: .8em;
+			filter: drop-shadow(0.35rem 0.35rem 0.4rem #353535)
+		}
+
+		.center {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			width: 50%;
+		}
+
+		.linkbox {
+			margin: 3px 0 20px 0;
+			display: block;
+			font-style: italic;
+			font-size: 0.8em;
+			font-weight: 300;
+			line-height: 1.3em;
+		}
+
+		#map {
+			width: 100%;
+			height: 45vh;
+			margin: 20px auto;
+			border: 1px solid #000000;
+			filter: drop-shadow(0.35rem 0.35rem 0.4rem #353535);
+			border-radius: 1%;
+
+		}
+
+		.max-image-width {
+			width: 100%;
+			border-radius: 3%;
+			filter: drop-shadow(0.35rem 0.35rem 0.4rem #353535);
+		}
+
+		/* Use float property to make two-column layout */
+		.first-column {
+			float: left;
+			width: 49%;
+			padding-right: 2%;
+		}
+
+		.column {
+			float: left;
+			width: 49%;
+		}
+
+		/* Clear floats after the columns */
+		.row::after {
+			content: "";
+			display: block;
+			clear: both;
+		}
+
+		/* When browser is 900px wide or less */
+		@media screen and (max-width: 900px) {
+
+			.first-column,
+			.second-column {
+				width: 100%;
+			}
+		}
+
+		.leaflet-tooltip {
+			font-family: 'Teko';
+			font-size: 1.4em;
+		}
+
+		.default-tooltip {
+			border: 1px dotted black;
+		}
+
+		.nuclear {
+			background-color: chartreuse;
+		}
+
+		.hydro {
+			background-color: dodgerblue;
+		}
+
+		.pumped-storage {
+			background-color: slategrey;
+		}
+
+		.geothermal {
+			background-color: firebrick;
+		}
+	</style>
+</head>
+
+<body>
+
+	<header>
+		<h1>Electrical Power in the United States</h1>
+		<h2>How are we leveraging technology to provide reliable electrical power whilst protecting wildlife and the
+			environment?</h2>
+	</header>
+	<section>
+		<div class="row">
+			<div id="map"></div>
+
+			<div class="first-column">
+				<h2>Generating Clean Power</h2>
+				<p>
+					Whether its the ridiculous notion of <a
+						href="https://www.ucsusa.org/resources/coal-and-air-pollution">"beautiful
+						clean coal"</a> and it's toxic smog or <a
+						href="https://www.epa.gov/sites/default/files/2016-12/documents/hfdwa_executive_summary.pdf">"safe
+						fracking"</a> that results in contamination of freshwater, our modern society, for better or
+					worse, is
+					utterly reliant on electrical power. When air and water pollution becomes unbearable due to health
+					concerns, the
+					responsible thing is to look to other forms of energy to power everyday needs. Having clean air and
+					water is near
+					and dear to me, as it is to any sane person out there.
+				</p>
+				<p>
+					Understandably, the natural tendency is to seek "green energy" as the alternative. After all, humans
+					are not the
+					only ones impacted by pollution. We share the planet with all manner of flora and fauna—a fact that
+					should be
+					self-evident.
+				</p>
+				<p>
+					The map above does not have the typical "green energy" solutions we hear about ad nauseam from
+					politicians and
+					the media. Instead, I've deliberately chosen to display nuclear, geothermal, and two forms of
+					hydroelectric power
+					plants. Why not "green solutions" such as solar, wind, and biomass? That's a great question!
+					<h2>
+						It's green until it isn't
+					</h2>
+					<p>
+						The political rhetoric of environmental conservation and care of natural wildlife habitats is
+						misaligned and
+						often contrary. Michael Moore's documentary <a href="https://planetofthehumans.com/">Planet of
+							the Humans</a>
+						reveals that "green energy" is a contradiction in terms regarding conservation. However, it is
+						quite "green"
+						in terms of money. The government subsidises green energy industries with <a
+							href="https://spectrum.ieee.org/how-much-does-the-us-government-subsidize-electricity-generating-technologies">tens
+							of billions of dollars every year</a> over any other power generation.
+					</p>
+					<p>
+						The materials required to manufacture "green" wind turbines requires quite a bit of mineral
+						extraction and
+						mining. Furthermore, these industrial and disposable eyesores <a
+							href="https://abcbirds.org/blog21/wind-turbine-mortality/">kill over a million birds each
+							year</a> in the
+						United States alone! Should we advocate for more turbines to increase this death toll in more
+						locations than
+						we already do today? It is irresponsible to wait until extinctions happen before collectively
+						saying, "oh, my
+						bad!"
+					</p>
+					<p>
+						What about solar power? One has to bulldoze large swaths of land to build them. Solar power
+						farms have failed
+						and resulted in a <a
+							href="http://www.hawaiifreepress.com/Articles-Main/ID/4686/Hawaiirsquos-Future-Abandoned-Solar-Farms-Clutter-California-Desert">post-industrial
+							wasteland</a> littered with derelict and broken panels in places such as Hawai`i and
+						California. Perhaps
+						we can keep trying? Well, the folks in California have subsidised exactly that and cleared
+						massive swaths of
+						nature to create mega solar power plants that <a
+							href="https://www.extremetech.com/extreme/188328-californias-new-solar-power-plant-is-actually-a-death-ray-thats-incinerating-birds-mid-flight">creates
+							focused solar beams of death</a> that incinerate birds mid-flight and send their smoking
+						corpses
+						plummeting to the ground. Destruction of habitat and burning birds alive isn't exactly "green"
+						or living in
+						harmony with nature. When will we say enough is enough?
+					</p>
+					<p>
+						As far biomass power plants, the idea of burning waste to generate power instead of filling
+						landfills is a
+						noble one. Since burning garbage isn't as efficient as burning trees, and since trees are
+						"renewable",
+						biomass power plants are labelled as "green." Unfortunately, there isn't enough waste to burn,
+						and the
+						clear-cutting of large swaths of forests is required to provide enough fuel to generate power.
+						The argument
+						favouring this practice is that proper forest management will enable a "crop rotation" of sorts.
+						However, it
+						is not only trees that are impacted by this. Wildlife of all kinds call these places home, and
+						<a href="https://www.worldwildlife.org/threats/deforestation-and-forest-degradation">habitat
+							destruction
+							through deforestation</a> causes the death of many species within interlinked ecosystems.
+						Deforestation
+						is directly responsible for <a
+							href="https://blog.theanimalrescuesite.greatergood.com/koala-extinction/">koalas being
+							"declared
+							‘Functionally Extinct’</a> with too few left to support the next generation."
+					</p>
+					<h2>The lights are always on</h2>
+					<p>
+						Nuclear, hydroelectric, and geothermal power can efficiently and reliably produce a sizable
+						portion of energy
+						to meet the needs of modern society. Nuclear power accounts for roughly 20% of total energy
+						production, and
+						hydroelectric accounts for approximately 7%. Unfortunately, as clean as it is, geothermal power
+						only accounts
+						for 0.4% of the overall power produced. On a positive note, these three technologies are capable
+						of running
+						24/7/365 and allow us to "always keep the lights on."
+					</p>
+					<p>
+						The most significant contributor is natural gas, which produces 40% of the total energy, but has
+						the downside
+						of extraction and transportation. Coal accounts for 19%, and renewables account for 20% of
+						energy
+						production—a large chunk of which is hydroelectric. The remaining 13% comes from biomass, wind,
+						and
+						solar—with the latter two requiring special environmental conditions to function at all.
+					</p>
+					<p>
+						None of these technologies is perfect. But we can readily see that even at 13% of the energy
+						production
+						coming from biomass, wind, and solar, the collateral damage to the environment is too much to
+						bear as it is.
+						Increasing the number of power plants of these three types is not an environmentally friendly
+						solution. Until
+						we come up with an efficient way to <a
+							href="https://engineering.mit.edu/engage/ask-an-engineer/is-there-a-way-to-harness-electricity-from-lightning/">harness
+							lightning from thunderstorms</a> or find a way to generate power with <a
+							href="https://www.wired.com/2012/10/dilithium-crystals-warp-drive/">dilithium crystals</a>
+						or <a href="https://babylon5.fandom.com/wiki/Artificial_gravity#Gravimetrics">gravimetric
+							engines</a>, to avoid
+						destroying the environment, we need to take a closer look at nuclear and hydroelectric as the
+						juice is not
+						worth the
+						squeeze if we attempt to increase the "green" 13% mentioned earlier. <i>Just ask the birds.</i>
+					</p>
+					<hr>
+
+					<h3>Project Notes:</h3>
+					<ul>
+						<li>This webpage was built to meet requirements for Module 7 of the <a
+								href="https://newmapsplus.github.io/map672/syllabus/">MAP 672: Programming For Web
+								Mapping</a>
+							course at the
+							<a href="https://newmapsplus.as.uky.edu/">University of Kentucky</a>.
+						</li>
+					</ul>
+					<!-- Be cautious of inlining styles. These will overwrite upstream CSS styles. -->
+					<h3>Tools, citations, and methodology used in this project:</h3>
+					<ul>
+
+						<li>All software tools used in this project were ran on the <a
+								href="https://freebsdfoundation.org/freebsd-project/what-is-freebsd/">FreeBSD
+								13-RELEASE-p7</a>
+							Operating
+							System.
+						</li>
+						<!--
+			 <li><a href="https://www.qgis.org/en/site/forusers/alldownloads.html#freebsd">QGIS 3.22.3-Białowieża</a> was used to build the static maps.</li> 
+		  -->
+						<li><a href="https://github.com/microsoft/vscodeVisual">Visual Studio Code - Open Source ("Code
+								- OSS")
+								1.64.2</a> was used for all coding with the following plugins installed: <a
+								href="https://beautifier.io/">Beautify</a>, <a
+								href="https://github.com/formulahendry/vscode-code-runner">Code
+								Runner</a>, and <a href="https://github.com/ritwickdey/vscode-live-server">Live
+								Server</a>.
+						<li>Code from <a href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">Leaflet 1.7.1</a> using
+							map tiles
+							by <a href="https://www.thunderforest.com/maps/transport-dark/">Thunderforest
+								Transport Dark</a> and map data
+							and
+							map data from <a href="https://www.openstreetmap.org/copyright">&copy;OpenStreetMap</a>
+							contributors.
+						</li>
+						<li>Images pulled from <a
+								href="https://duckduckgo.com/?q=deforestation+koala&t=h_&iar=images&iax=images&ia=images">DuckDuckGo</a>
+							and <a
+								href="https://www.startpage.com/do/dsearch?query=dead%20birds%20solar%20farm">StartPage</a>
+							image queries and belong to their respective owners.</li>
+						<!-- <li>Code from <a href="http://code.jquery.com/">jQuery 3.6.0</a> is front loaded to enable
+							effects in
+							Leaflet.
+						</li> -->
+						<li>Data accessed 6 March 2022.</li>
+						<hr>
+
+						<h3>About the author:</h3>
+						<img id="avatar" class="center" src="photos/profile_pic_bw.png">
+						<p id="bio">
+							An artist, scientist, bibliophile, and autodidact at heart, Sirius enjoys applying these
+							facets in his role of dad and husband first and foremost. He also finds happiness with
+							spending time with <a>Shin'yū the Maltipoo<span><img src="photos/shin-yu.jpg"></span></a>
+							(Shin'yū or 親友 is the Japanese term for "best friend"). Sirius also enjoys calligraphy,
+							metacognition, philosophy, and the pursuit of arcane knowledge regardless of the path it
+							puts him on. He generally prefers Open Source Software solutions such as FreeBSD for daily
+							computing, QGIS for cartography and geospatial analysis, GIMP and Inkscape for image
+							manipulation. However, he is no stranger to proprietary solutions such as ArcGIS Pro, Adobe
+							Photoshop and Illustrator.
+						</p>
+						<p id="linkedin"><i>Connect with <a
+									href="https://www.linkedin.com/in/siriusbontea/">@SiriusBontea</a>
+								on LinkedIn:</i>
+							<br>
+						</p>
+						<p><a href="https://www.linkedin.com/in/siriusbontea/"><img
+									src="images/SiriusBonteaLinkedInQRcode150px.png" alt="Sirius T. Bontea @ LinkedIn"
+									id="linkedin" class="center"></a>
+						</p>
+
+			</div>
+			<div class="column">
+				<img class="max-image-width" src="photos/flock-turbine.jpg" title="flock flying toward a turbine">
+				<div class="linkbox">
+					Flock of birds flying toward some wind turbines.
+				</div>
+				<img class="max-image-width" src="photos/dead-birds.JPG" title="birds killed by wind turbines">
+				<div class="linkbox">
+					Birds killed by wind turbines.
+				</div>
+				<img class="max-image-width" src="photos/dead-red-kite.jpg" title="Red kite killed by wind turbine">
+				<div class="linkbox">
+					Red kite killed by a wind turbine.
+				</div>
+				<img class="max-image-width" src="photos/de-winged-vulture.jpg"
+					title="Vulture de-winged by a wind turbine.">
+				<div class="linkbox">
+					Vulture de-winged by a wind turbine.
+				</div>
+				<img class="max-image-width" src="photos/still-alive-turbine-bird.jpg"
+					title="This bird was badly injured by wind turbine. In the wild, this is death sentence.">
+				<div class="linkbox">
+					This bird was badly injured by a wind turbine. In the wild, this is a death sentence.
+				</div>
+				<img class="max-image-width" src="photos/solar-farm-habitat-destruction.jpg"
+					title="Solar farm. It is not a farm that supports life.">
+				<div class="linkbox">
+					Solar farm. It is not a farm that supports life.
+				</div>
+				<img class="max-image-width" src="photos/solar-farm-habitat-destruction2.jpg"
+					title="Sunlight reflecting off of the solar panel array. It creates a focused beam of death that incinerates birds alive in mid-flight.">
+				<div class="linkbox">
+					Sunlight reflecting off of the solar panel array. It creates a focused beam of death that
+					incinerates birds alive
+					in mid-flight.
+				</div>
+				<img class="max-image-width" src="photos/solar-farm-burned-bird.jpg"
+					title="Burned alive! If this was a mama bird, it's not coming back to the nest anytime soon.">
+				<div class="linkbox">
+					Burned alive! If this was a mama bird, it's not coming back to the nest anytime soon.
+				</div>
+				<img class="max-image-width" src="photos/solar-farm-burned-bird2.jpg"
+					title="Another victim of the green energy solar death ray.">
+				<div class="linkbox">
+					Another victim of the green energy solar death ray.
+				</div>
+				<img class="max-image-width" src="photos/solar-farm-burned-bird3.jpg"
+					title="This poor little fellow never had a chance.">
+				<div class="linkbox">
+					This poor little fellow never had a chance.
+				</div>
+				<img class="max-image-width" src="photos/clear-cut-forest.jpg"
+					title="They left a little of forest behind. How considerate.">
+				<div class="linkbox">
+					They left a little bit of forest behind. How considerate.
+				</div>
+				<img class="max-image-width" src="photos/homeless-squirrel.jpg"
+					title="This squirrel looks down on what was once his home.">
+				<div class="linkbox">
+					This squirrel looks down on what was once his home.
+				</div>
+				<img class="max-image-width" src="photos/homeless-owl.jpg"
+					title="This owl has no home to come back to. What was the fate of the owlets in the nest?">
+				<div class="linkbox">
+					This owl has no home to come back to. What was the fate of her owlets in the nest?
+				</div>
+				<img class="max-image-width" src="photos/homeless-koala.jpg" title="Deforestation
+					is directly responsible for koalas being 'declared
+						‘Functionally Extinct’</a> with too few left to support the next generation.'">
+				<div class="linkbox">
+					Deforestation
+					is directly responsible for <a
+						href="https://blog.theanimalrescuesite.greatergood.com/koala-extinction/">koalas
+						being
+						"declared
+						‘Functionally Extinct’</a> with too few left to support the next generation."
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer>
+		<hr>
+
+		<a href="https://newmapsplus.github.io">
+			<img src="https://newmapsplus.github.io/assets/graphics/logo-2018-nmp-75px-h-gray.png"
+				alt="University of Kentucky Geography">
+		</a>
+
+		<a href="https://uky-gis.github.io">
+			<img src="https://newmapsplus.github.io/assets/graphics/logo-2018-geography-75px-h.png"
+				alt="University of Kentucky Geography">
+		</a>
+
+	</footer>
+
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+	<script src="data/power-plants.js"></script>
+	<script>
+		// map options
+		var options = {
+			center: [38, -95],
+			zoom: 4
+		}
+
+		// create a Leaflet map in our division container with id of 'map'
+		var map = L.map('map', options);
+
+		// Leaflet providers base map URL
+		var basemap_source =
+			'https://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey=ef45178e209e461983726086cb45354d'
+
+		// Leaflet providers attributes
+		var basemap_options = {
+			attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+			apikey: 'ef45178e209e461983726086cb45354d',
+			maxZoom: 22
+		};
+
+		// request some basemap tiles and add to the map
+		var tiles = L.tileLayer(basemap_source, basemap_options).addTo(map);
+
+		// load the .sort() method before the calling the L.geoJson() method
+		plants.features.sort(function (a, b) {
+			return b.properties.capacity_mw - a.properties.capacity_mw;
+		});
+
+		// setting up the getRadius() funtion for use in drawing the map symbols
+		function getRadius(area) {
+			var radius = Math.sqrt(area / Math.PI);
+			return radius * .6;
+		}
+
+		var commonStyles = {
+			weight: 0.7,
+			opacity: 0.5,
+			stroke: true,
+			fillOpacity: 0.8
+		}
+
+		// Attempting to push fuel_source data into an Array... I couldn't get it to work.
+		// let fuelArray = [];
+		// for (let fuelIndex = 0; plants.length; fuelIndex++) {
+		// 	fuelArray.push(plants.properties.fuel_source[fuelArray]);
+		// }
+		// console.log(`Fuels list ${fuelArray}`);
+
+		// This didn't work either...
+		// let fuelSource = plants.map(object => {
+		// 	if (object.hasOwnProperty('fuel_source')) return object.name
+		// 	return ""
+		// })
+		// console.log('user names list ', fuelSource);
+		function sortFuelsByCapacity(plants) {
+			let fuels = {}
+			for (let plant of plants.features) {
+				const props = plant.properties
+				for (let fuel in props.fuel_source) {
+					console.log(fuel, props.fuel_source, props.fuel_source[fuel])
+					if (fuels[fuel]) {
+						fuels[fuel] += props.fuel_source[fuel]
+					} else {
+						fuels[fuel] = props.fuel_source[fuel]
+					}
+				}
+			}
+			const sorted = []
+			for (sort in fuels) {
+				sorted.push([sort, fuels[sort]])
+			}
+			fuels.byMw = sorted.sort(function (a, b) {
+				return b[1] - a[1]
+			})
+			return fuels
+		}
+
+		const sumFuels = sortFuelsByCapacity(plants)
+
+		console.log('fuels list ', sumFuels);
+
+		// var hydroLayer = L.geoJson(plants, {
+		// 	pointToLayer: function (feature, latlng) {
+		// 		return L.circleMarker(latlng, commonStyles);
+		// 	},
+		// 	filter: function (feature) {
+		// 		if (feature.properties.fuel_source.Hydro) {
+		// 			return feature;
+		// 		}
+		// 	},
+		// 	style: function (feature, commonStyles) {
+		// 		return {
+		// 			color: 'powderblue',
+		// 			fillColor: 'dodgerblue',
+		// 			radius: getRadius(feature.properties.fuel_source.Hydro)
+		// 		}
+		// 	}
+		// }).addTo(map);
+
+		// var pumpedStorageLayer = L.geoJson(plants, {
+		// 	pointToLayer: function (feature, latlng) {
+		// 		return L.circleMarker(latlng, commonStyles);
+		// 	},
+		// 	filter: function (feature) {
+		// 		if (feature.properties.fuel_source['Pumped Storage']) {
+		// 			return feature;
+		// 		}
+		// 	},
+		// 	style: function (feature, commonStyles) {
+		// 		return {
+		// 			color: 'gainsboro',
+		// 			fillColor: 'slategray',
+		// 			weight: 0.7,
+		// 			opacity: 0.5,
+		// 			stroke: true,
+		// 			fillOpacity: 0.8,
+		// 			radius: getRadius(feature.properties.fuel_source['Pumped Storage'])
+		// 		}
+		// 	}
+		// }).addTo(map);;
+
+		// var GeothermalLayer = L.geoJson(plants, {
+		// 	pointToLayer: function (feature, latlng) {
+		// 		return L.circleMarker(latlng, commonStyles);
+		// 	},
+		// 	filter: function (feature) {
+		// 		if (feature.properties.fuel_source.Geothermal) {
+		// 			return feature;
+		// 		}
+		// 	},
+		// 	style: function (feature, commonStyles) {
+		// 		return {
+		// 			color: 'peru',
+		// 			fillColor: 'firebrick',
+		// 			weight: 0.7,
+		// 			opacity: 0.5,
+		// 			stroke: true,
+		// 			fillOpacity: 0.8,
+		// 			radius: getRadius(feature.properties.fuel_source.Geothermal)
+		// 		}
+		// 	}
+		// }).addTo(map);;
+
+		// var nuclearLayer = L.geoJson(plants, {
+		// 	pointToLayer: function (feature, latlng) {
+		// 		return L.circleMarker(latlng, commonStyles);
+		// 	},
+		// 	filter: function (feature) {
+		// 		if (feature.properties.fuel_source.Nuclear) {
+		// 			return feature;
+		// 		}
+		// 	},
+		// 	style: function (feature, commonStyles) {
+		// 		return {
+		// 			color: 'yellow',
+		// 			fillColor: 'chartreuse',
+		// 			weight: 0.7,
+		// 			opacity: 0.5,
+		// 			stroke: true,
+		// 			fillOpacity: 0.8,
+		// 			radius: getRadius(feature.properties.fuel_source.Nuclear)
+		// 		}
+		// 	}
+		// }).addTo(map);
+
+		var filteredPlants = L.geoJson(plants, {
+			pointToLayer: function (feature, latlng) {
+				return L.circleMarker(latlng, {
+					radius: getRadius(feature.properties.capacity_mw),
+
+				});
+			},
+			filter: function (feature) {
+				if (feature.properties.fuel_source.Hydro ||
+					feature.properties.fuel_source["Pumped Storage"] ||
+					feature.properties.fuel_source.Geothermal ||
+					feature.properties.fuel_source.Nuclear) {
+					return feature;
+				}
+			},
+			style: function (feature) {
+				if (feature.properties.fuel_source.Hydro) {
+					return {
+						color: 'powderblue',
+						fillColor: 'dodgerblue',
+						weight: 0.7,
+						opacity: 0.5,
+						stroke: true,
+						fillOpacity: 0.8,
+						radius: getRadius(feature.properties.fuel_source.Hydro)
+					};
+				} else if (feature.properties.fuel_source["Pumped Storage"]) {
+					return {
+						color: 'gainsboro',
+						fillColor: 'slategray',
+						weight: 0.7,
+						opacity: 0.5,
+						stroke: true,
+						fillOpacity: 0.8,
+						radius: getRadius(feature.properties.fuel_source["Pumped Storage"])
+					};
+				} else if (feature.properties.fuel_source.Geothermal) {
+					return {
+						color: 'peru',
+						fillColor: 'firebrick',
+						weight: 0.7,
+						opacity: 0.5,
+						stroke: true,
+						fillOpacity: 0.8,
+						radius: getRadius(feature.properties.fuel_source.Geothermal)
+					};
+				} else if (feature.properties.fuel_source.Nuclear) {
+					return {
+						color: 'yellow',
+						fillColor: 'chartreuse',
+						weight: 0.7,
+						opacity: 0.5,
+						stroke: true,
+						fillOpacity: 0.8,
+						radius: getRadius(feature.properties.fuel_source.Nuclear)
+					}
+				}
+			},
+			onEachFeature: function (feature, layer) {
+
+
+				// attempting to extract the data for the popup
+				for (let key in plants) {
+					// console.log(key + ":", plants[key]);
+				}
+				/* 
+				  ┌─────────────────────────────────────────────────────────────────────────┐
+				  │   I'm still getting the [object Object] output, despite seeing all of   │
+				  │ it in the console.log					                                │
+				  │                                                                         │
+				  │         I've tried a few different variations of:                       │
+				  │         (let key in plants)                                             │
+				  │         such as (let key in plants.features.properties.fuel_source)     │
+				  │                                                                         │
+				  │         for (let key in plants.features.properties.fuel_source) {       │
+				  │           console.log(key + ":",                                        │
+				  │           plants.features.properties.fuel_source[key]);                 │
+				  │         }                                                               │
+				  │ But I get the following error:                                          │
+				  │ Uncaught TypeError: plants.features.properties is undefined             │
+				  └─────────────────────────────────────────────────────────────────────────┘
+				 */
+				// normal popup and tooltip stuff
+				var props = feature.properties
+				var sources = listSources(props.fuel_source) // props.fuel_source is an objects
+				var popup =
+					`<span class="bold-popup">${props.plant_name}</span><br>
+				Total Capacity: 
+				${props.capacity_mw.toLocaleString()} Megawatts<br>
+				${sources}`
+
+
+				layer.bindPopup(popup);
+
+				let className = 'default-tooltip'
+				if (feature.properties.fuel_source.Nuclear) {
+					className = 'nuclear'
+				} else if (feature.properties.fuel_source.Hydro) {
+					className = 'hydro'
+				} else if (feature.properties.fuel_source['Pumped Storage']) {
+					className = 'pumped-storage'
+				} else {
+					(feature.properties.fuel_source.Geothermal)
+					className = 'geothermal'
+				}
+
+				layer.bindTooltip(props.plant_name, {
+					className: className,
+					direction: 'bottom'
+				});
+			},
+		}).addTo(map);
+
+		function listSources(plant) {
+			const sources = [];
+			for (let key in plant) {
+				if (plant[key]) {
+					sources.push([plant[key], key]);
+				}
+			}
+			sources.sort(function (a, b) {
+				return b[0] - a[0];
+			});
+			let list = "";
+			for (i of sources) {
+				list += `${i[1]}: ${i[0].toLocaleString()} MW<br>`
+			}
+			return list;
+		}
+
+		function getFillColor(fuel) {
+			var props = feature.properties
+			var fuel = props.fuel_source
+			if (fuel = Hydro) {
+				return `'dodgerblue'`
+			} else if (fuel = 'Pumped Storage') {
+				return `'slategray'`
+			} else if (fuel = Geothermal) {
+				return `'firebrick'`
+			} else if (fuel = Nuclear) {
+				return `'chartreuse'`
+			} else {
+				return `'red'`
+			}
+		}
+
+		/* 
+		  ┌────────────────────────────────────────────────────────────────────────────┐
+		  │     This is a strange one...On the mouse out, it doesn't completely        │
+		  │     reset and leaves a faded colour. It's as if its being drawn twice,     │
+		  │     but I haven't figured out how to trouble shoot this one.               │
+		  │     I tried commenting the pointToLayer section in the "filteredPlants"    │
+		  │     object, but this resulted in the map failing to load.                  │
+		  └────────────────────────────────────────────────────────────────────────────┘
+		 */
+		// to get mouseover/mouseout effects
+		filteredPlants.eachLayer(function (layer) {
+			layer.on('mouseover', function (e) {
+				e.target.setStyle({
+					color: "red",
+					weight: "10"
+				})
+				this.openTooltip()
+			})
+			layer.on('mouseout', function (e) {
+				filteredPlants.resetStyle(layer)
+				this.closeTooltip()
+
+			})
+		})
+
+		/* 
+		  ┌─────────────────────────────────────────────────────────────────────────┐
+		  │ The code below is from the completed lab 7 portion sans challenge and   │
+		  │ will serve as a reference.                                              │
+		  └─────────────────────────────────────────────────────────────────────────┘
+		 */
+		/* 
+				// Hydroelectric power plant layer
+				var hydroLayer = L.geoJson(plants, {
+					pointToLayer: function (feature, latlng) {
+						return L.circleMarker(latlng, commonStyles);
+					},
+					filter: function (feature) {
+						if (feature.properties.fuel_source.Hydro) {
+							return feature;
+						}
+					},
+					style: function (feature) {
+						return {
+							color: 'powderblue',
+							fillColor: 'dodgerblue',
+							radius: getRadius(feature.properties.fuel_source.Hydro)
+						}
+					},
+
+					// popup and tooltip here:
+					onEachFeature: function (feature, layer) {
+
+						var props = feature.properties
+						var popup =
+							` < span class = "bold-popup" > $ {
+					props.plant_name
+				} < /span><br>
+				Total Capacity from Hydroelectric:
+					$ {
+						props.fuel_source.Hydro.toLocaleString()
+					}
+				Megawatts `
+
+
+						layer.bindPopup(popup);
+						layer.bindTooltip(props.plant_name);
+					},
+				}).addTo(map);
+
+				// This portion mirrors the code from the lesson video and adds visual effect to map layer on mouseover/mouseout.
+				hydroLayer.eachLayer(function (layer) {
+					layer.on('mouseover', function (e) {
+						e.target.setStyle({
+							color: "red",
+							weight: "10"
+						})
+						this.openTooltip()
+					})
+					layer.on('mouseout', function (e) {
+						hydroLayer.resetStyle(layer)
+						this.closeTooltip()
+
+					})
+				})
+
+				// Pumped-Storage hydroelectric power plant layer
+				var pumpedStorageLayer = L.geoJson(plants, {
+					pointToLayer: function (feature, latlng) {
+						return L.circleMarker(latlng, commonStyles);
+					},
+					filter: function (feature) {
+						if (feature.properties.fuel_source["Pumped Storage"]) {
+							return feature;
+						}
+					},
+					style: function (feature) {
+						return {
+							color: 'gainsboro',
+							fillColor: 'slategray',
+							radius: getRadius(feature.properties.fuel_source["Pumped Storage"])
+						}
+					},
+					// popup and tooltip here:
+					onEachFeature: function (feature, layer) {
+
+						var props = feature.properties
+						var popup =
+							` < span class = "bold-popup" > $ {
+					props.plant_name
+				} < /span><br>
+				Total Capacity from Hydroelectric(Pumped Storage):
+					$ {
+						props.fuel_source['Pumped Storage'].toLocaleString()
+					}
+				Megawatts `
+
+
+						layer.bindPopup(popup);
+						layer.bindTooltip(props.plant_name);
+					},
+				}).addTo(map);
+
+				pumpedStorageLayer.eachLayer(function (layer) {
+					layer.on('mouseover', function (e) {
+						e.target.setStyle({
+							color: "red",
+							weight: "10"
+						})
+						this.openTooltip()
+					})
+					layer.on('mouseout', function (e) {
+						pumpedStorageLayer.resetStyle(layer)
+						this.closeTooltip()
+
+					})
+				})
+
+				// Geothermal power plant layer
+				var geothermalLayer = L.geoJson(plants, {
+					pointToLayer: function (feature, latlng) {
+						return L.circleMarker(latlng, commonStyles);
+					},
+					filter: function (feature) {
+						if (feature.properties.fuel_source.Geothermal) {
+							return feature;
+						}
+					},
+					style: function (feature) {
+						return {
+							color: 'peru',
+							fillColor: 'firebrick',
+							radius: getRadius(feature.properties.fuel_source.Geothermal)
+						}
+					},
+					// popup and tooltip here:
+					onEachFeature: function (feature, layer) {
+
+						var props = feature.properties
+						var popup =
+							` < span class = "bold-popup" > $ {
+					props.plant_name
+				} < /span><br>
+				Total Capacity from Geothermal:
+					$ {
+						props.fuel_source.Geothermal.toLocaleString()
+					}
+				Megawatts `
+
+
+						layer.bindPopup(popup);
+						layer.bindTooltip(props.plant_name);
+					},
+				}).addTo(map);
+
+				geothermalLayer.eachLayer(function (layer) {
+					layer.on('mouseover', function (e) {
+						e.target.setStyle({
+							color: "red",
+							weight: "10"
+						})
+						this.openTooltip()
+					})
+					layer.on('mouseout', function (e) {
+						geothermalLayer.resetStyle(layer)
+						this.closeTooltip()
+
+					})
+				})
+
+				// Nuclear power plant layer
+				var nuclearLayer = L.geoJson(plants, {
+					pointToLayer: function (feature, latlng) {
+						return L.circleMarker(latlng, commonStyles);
+					},
+					filter: function (feature) {
+						if (feature.properties.fuel_source.Nuclear) {
+							return feature;
+						}
+					},
+					style: function (feature) {
+						return {
+							color: 'yellow',
+							fillColor: 'chartreuse',
+							radius: getRadius(feature.properties.fuel_source.Nuclear)
+						}
+					},
+					// popup and tooltip here:
+					onEachFeature: function (feature, layer) {
+
+						var props = feature.properties
+						var popup =
+							` < span class = "bold-popup" > $ {
+					props.plant_name
+				} < /span><br>
+				Total Capacity from Nuclear:
+					$ {
+						props.fuel_source.Nuclear.toLocaleString()
+					}
+				Megawatts `
+
+
+						layer.bindPopup(popup);
+						layer.bindTooltip(props.plant_name);
+					},
+				}).addTo(map);
+
+				nuclearLayer.eachLayer(function (layer) {
+					layer.on('mouseover', function (e) {
+						e.target.setStyle({
+							color: "red",
+							weight: "10"
+						})
+						this.openTooltip()
+					})
+					layer.on('mouseout', function (e) {
+						nuclearLayer.resetStyle(layer)
+						this.closeTooltip()
+
+					})
+				}) */
+	</script>
+
+</body>
+
+</html>
