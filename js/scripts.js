@@ -50,5 +50,55 @@ window.addEventListener('DOMContentLoaded', event => {
             }
         });
     });
+    const hexcontent = {
+        count: 3,
+        0: {
+            href: 'kentucky-owls',
+            img: 'project1.png',
+            h1: 'Kentucky\'s Owls',
+            p: 'Mapping native and visiting Owls in Kentucky'
+        },
+        1: {
+            href: 'snowy-owls',
+            img: 'project2.png',
+            h1: 'Snowy Owls',
+            p: 'The North American Snowy Owl'
+        },
+        2: {
+            href: 'electrical-power',
+            img: 'project3.png',
+            h1: 'Electrical Power',
+            p: 'Analysis of "green" energy in the United States'
+        },
+        3: {
+            img: 'project-placeholder.png',
+            h1: 'Project Placeholder',
+            p: 'Placeholder for mapping project'
+        },
+
+    }
+    document.querySelectorAll('.hexIn').forEach(function(item, index) {
+        let props
+        let link = ''
+        let count = hexcontent.count
+        if (index >= count) {
+            props = hexcontent[count]
+        } else {
+            props = hexcontent[index];
+            link = `<a href="https://siriusbontea.github.io/${props.href}">Link</a>`;
+        }
+    
+        const place = ` <div class="hexLink">
+        <div class="img" style="background-image:url(assets/img/${props.img});"></div>
+        <h1 id="hextitle">${props.h1}</h1>
+        <p id="hextext">${props.p} - ${link}</p>
+        </a>`
+
+        item.innerHTML = place;
+        item.addEventListener('mouseover', function(e) {
+          console.log(item);
+        });
+    });
+
 
 });
