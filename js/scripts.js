@@ -51,7 +51,7 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     });
     const hexcontent = {
-        count: 4,
+        count: 5,
         0: {
             href: 'kentucky-owls',
             img: 'project1.png',
@@ -76,7 +76,13 @@ window.addEventListener('DOMContentLoaded', event => {
             h1: 'Alaska Wages',
             p: 'Choropleth map showing blue-collar wages'
         },
-        4: {
+         4: {
+            href: 'karate',
+            img: 'project5.png',
+            h1: 'Okinawa',
+            p: 'The birthplace of karate'
+        },
+        5: {
             img: 'project-placeholder.png',
             h1: 'Project Placeholder',
             p: 'Placeholder for mapping project'
