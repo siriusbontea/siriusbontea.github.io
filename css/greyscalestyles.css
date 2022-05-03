@@ -270,14 +270,16 @@ sup {
   top: -0.5em;
 }
 
-a {
-  color: #64a19d;
-  text-decoration: underline;
-}
+	a {
+	  color: #a2d5ff;
+	  text-decoration: 0.1px underline dotted #6e6e6e;
+	}
 
-a:hover {
-  color: #50817e;
-}
+	a:hover {
+	  text-decoration: underline;
+	  color: #ffee00;
+	  filter: drop-shadow(0rem 0rem 0.4rem #ffffff);
+	}
 
 a:not([href]):not([class]),
 a:not([href]):not([class]):hover {

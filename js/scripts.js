@@ -51,7 +51,7 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     });
     const hexcontent = {
-        count: 3,
+        count: 4,
         0: {
             href: 'kentucky-owls',
             img: 'project1.png',
@@ -68,9 +68,15 @@ window.addEventListener('DOMContentLoaded', event => {
             href: 'electrical-power',
             img: 'project3.png',
             h1: 'Electrical Power',
-            p: 'Analysis of "green" energy in the United States'
+            p: '"green" energy in the United States'
         },
         3: {
+            href: 'alaska-wages',
+            img: 'project4.png',
+            h1: 'Alaska Wages',
+            p: 'Choropleth map showing blue-collar wages'
+        },
+        4: {
             img: 'project-placeholder.png',
             h1: 'Project Placeholder',
             p: 'Placeholder for mapping project'
@@ -85,13 +91,13 @@ window.addEventListener('DOMContentLoaded', event => {
             props = hexcontent[count]
         } else {
             props = hexcontent[index];
-            link = `<a href="https://siriusbontea.github.io/${props.href}">Link</a>`;
+            link = `<a href="https://siriusbontea.github.io/${props.href}">${props.p}</a>`;
         }
     
         const place = ` <div class="hexLink">
         <div class="img" style="background-image:url(assets/img/${props.img});"></div>
         <h1 id="hextitle">${props.h1}</h1>
-        <p id="hextext">${props.p} - ${link}</p>
+        <p id="hextext">${link}</p>
         </a>`
 
         item.innerHTML = place;
