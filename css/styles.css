@@ -7,3 +7,15 @@
         0 0 8rem var(--glow-shadow),
         0 0 10rem var(--glow-shadow);
 }
+
+
+	a {
+	    color: #a2d5ff;
+	    text-decoration: 2px underline dotted #5d5d5d;
+	}
+
+	a:hover {
+	    text-decoration: 2px underline;
+	    color: #ffee00;
+	    filter: drop-shadow(0rem 0rem 0.4rem #ffffff);
+	}
