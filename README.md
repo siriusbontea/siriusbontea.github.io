@@ -19,10 +19,3 @@
 >*(Long pause.)*<br>
 >*"So, uh, what is it that do study then?"*<br>
 >― Ken Jennings <br>
-
-There isn't much here, but there will be soon.<br>
-For now, check out a few small projects I've been working on:
-
-- [Mapping Kentucky's Owls](https://siriusbontea.github.io/kentucky-owls)
-- [North American Snowy Owls](https://siriusbontea.github.io/snowy-owls)
-- [Electrical Power in the United States](https://siriusbontea.github.io/electrical-power)
