@@ -86,7 +86,7 @@ window.addEventListener('DOMContentLoaded', event => {
             href: 'round-earth',
             img: 'round-earth.png',
             h1: 'Round Earth',
-            p: 'Round like an oblong spheroid'
+            p: 'Round like an oblate spheroid'
         },
         6: {
             href: 'new-orleans',
