@@ -51,68 +51,74 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     });
     const hexcontent = {
-        count: 10,
+        count: 11,
         0: {
+            href: 'roman-empire',
+            img: 'roman-empire.png',
+            h1: 'Roman Infrastructure',
+            p: 'Mapping the Infrastructure of the Roman Empire'
+        },
+        1: {
             href: 'kentucky-owls',
             img: 'kentucky-owls.png',
             h1: 'Kentucky\'s Owls',
             p: 'Mapping native and visiting Owls in Kentucky'
         },
-        1: {
+        2: {
             href: 'snowy-owls',
             img: 'snowy-owls.png',
             h1: 'Snowy Owls',
             p: 'The North American Snowy Owl'
         },
-        2: {
+        3: {
             href: 'karate',
             img: 'okinawa-karate.png',
             h1: 'Okinawa',
             p: 'The birthplace of karate'
         },
-        3: {
+        4: {
             href: 'kenya-education',
             img: 'kenya-education.png',
             h1: 'Education in Kenya',
             p: 'Analysis of Kenya\'s Education System in 2014'
         },
-        4: {
+        5: {
             href: 'alaska-wages',
             img: 'blue-collar-alaska.png',
             h1: 'Alaska Wages',
             p: 'Choropleth map showing blue-collar wages'
         },
-        5: {
+        6: {
             href: 'electrical-power',
             img: 'power-plants.png',
             h1: 'Electrical Power',
             p: '"green" energy in the United States'
         },
-        6: {
+        7: {
             href: 'round-earth',
             img: 'round-earth.png',
             h1: 'Round Earth',
             p: 'Round like an oblate spheroid'
         },
-        7: {
+        8: {
             href: 'new-orleans',
             img: 'new-orleans.png',
             h1: 'New Orleans',
             p: 'Mapping Points of Interest'
         },
-        8: {
+        9: {
             href: 'prison-town',
             img: 'leavenworth-donuts.png',
             h1: 'Prison Town',
             p: 'Fort Leavenworth, Leavenworth, Lansing Prisons'
         },
-        9: {
+        10: {
             href: '2001-2015-US-unemployment',
             img: 'us-unemployment-2001-2015.png',
             h1: 'US Unemployment',
             p: 'Choropleth map of US unemployment 2001 to 2015'
         },
-        10: {
+        11: {
             img: 'project-placeholder.png',
             h1: 'Project Placeholder',
             p: 'Placeholder for mapping project'
