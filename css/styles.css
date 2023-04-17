@@ -19,3 +19,9 @@
 	    color: #ffee00;
 	    filter: drop-shadow(0rem 0rem 0.4rem #ffffff);
 	}
+
+img.svg-award {
+	  width: 40%; /* set the width of the image */
+	  height: auto; /* allow the height to adjust automatically to preserve aspect ratio */
+	  padding: 5%;
+	}
