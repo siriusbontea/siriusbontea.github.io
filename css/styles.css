@@ -26,3 +26,10 @@ img.svg-award {
 	  padding: 5%;
 	}
 
+div {
+    font-family: 'Roboto', sans-serif;
+}
+div a {
+    color: #4a2c2a;
+    font-weight: bold;
+}
